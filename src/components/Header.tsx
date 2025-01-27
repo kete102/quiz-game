@@ -2,7 +2,10 @@ import { SignedIn, UserButton } from '@clerk/clerk-react'
 
 function Header() {
 	return (
-		<header className='w-full mx-auto max-w-screen-xl dark:bg-black/30 bg-white/50 mt-2 flex items-center justify-between p-4 rounded-lg'>
+		<header className='w-full  select-none mx-auto px-2 md:px-4 dark:bg-black/30 bg-white/50 mt-2 flex items-center justify-between p-4 rounded-lg'>
+			<h1 className='text-2xl text-black dark:text-white font-bold tracking-wide'>
+				Quizz Game
+			</h1>
 			<SignedIn>
 				<UserButton
 					appearance={{
@@ -12,9 +15,6 @@ function Header() {
 					}}
 				/>
 			</SignedIn>
-			<h1 className='text-2xl text-black dark:text-white font-bold tracking-wide'>
-				Quizz Game
-			</h1>
 		</header>
 	)
 }
