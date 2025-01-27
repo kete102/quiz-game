@@ -10,11 +10,9 @@ function App() {
 	return (
 		<div className='w-full min-h-screen flex flex-col'>
 			<Header />
-			<main className='container max-w-[1200px] flex-1 rounded-lg  mt-8 mx-auto text-4xl font-semibold '>
-				<div className='w-full h-full p-2 grid place-content-center'>
-					{!isGameActive && <Overview />}
-					{isGameActive && <Wizzard />}
-				</div>
+			<main className='container h-full max-w-[1100px] grow rounded-lg p-2 mt-8 mx-auto text-4xl font-semibold '>
+				{!isGameActive && <Overview />}
+				{isGameActive && <Wizzard />}
 			</main>
 			<Footer />
 		</div>
