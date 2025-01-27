@@ -9,6 +9,10 @@ function Wizzard() {
 		setIsGameActive(false)
 	}
 
+	const handleStartGame = () => {
+		console.log('Start game')
+	}
+
 	return (
 		<div className='w-full space-y-2 h-full flex flex-col'>
 			<h2 className='opacity-80 tracking-wider text-3xl md:text-4xl'>
@@ -27,7 +31,7 @@ function Wizzard() {
 				</button>
 				<button
 					className='font-normal select-none bg-rose-400/50 hover:bg-rose-400 tracking-tight w-full md:text-xl lg:max-w-xl text-red-300 hover:text-red-800 hover:font-medium focus:bg-rose-400 text-lg px-4 py-3 rounded-md  transition-all hover:shadow-xl hover:scale-102 border-none cursor-pointer hover:border-white'
-					onClick={handleQuitGame}
+					onClick={handleStartGame}
 				>
 					Quit game
 				</button>
