@@ -4,7 +4,7 @@ function Footer() {
 	return (
 		<footer className='w-full flex justify-center py-4 mb-2'>
 			<h3 className='cursor-pinter'>
-				Made by
+				Made by{' '}
 				<a
 					href='#'
 					className='underline inline-flex items-center gap-x-2 underline-offset-1'
