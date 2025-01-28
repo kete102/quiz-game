@@ -5,7 +5,7 @@ import { DIFFICULTIES } from '../../utils/constants'
 function Difficultypicker() {
 	return (
 		<section className='p-2 w-full'>
-			<h2 className='text-2xl opacity-60'>Difficulty</h2>
+			<h2 className='text-2xl font-semibold opacity-60'>Difficulty</h2>
 			<div className='flex mt-4 items-center flex-wrap gap-2 w-full max-w-xl'>
 				{DIFFICULTIES.map((difficulty: Difficulty) => (
 					<button
