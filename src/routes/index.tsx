@@ -1,5 +1,5 @@
 import { createFileRoute, Navigate } from '@tanstack/react-router'
-import { RedirectToSignIn, SignedIn, SignedOut } from '@clerk/clerk-react'
+import { SignedIn, SignedOut } from '@clerk/clerk-react'
 import React from 'react'
 
 export const Route = createFileRoute('/')({
@@ -10,7 +10,7 @@ function RouteComponent() {
 	return (
 		<React.Fragment>
 			<SignedOut>
-				<RedirectToSignIn redirectUrl={'/login'} />
+				<Navigate to={'/login'} />
 			</SignedOut>
 			<SignedIn>
 				<Navigate to='/dashboard' />
