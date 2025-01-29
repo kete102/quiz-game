@@ -1,29 +1,7 @@
 import { Plus } from 'lucide-react'
 import { CATEGORIES } from '../../utils/constants'
 import { useGameStore } from '@/store/game/store'
-import { CategoriesApiValue } from '@/services/api/types.ts'
-
-function useCategories() {
-	const { setCategories } = useGameStore()
-
-	const handleAddCategory = (
-		event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-	) => {
-		const button = event.currentTarget
-		const { success, data: newCategory } = CategoriesApiValue.safeParse(
-			button.id
-		)
-		if (success) {
-			setCategories(newCategory)
-		} else {
-			console.log('Categoria incorrecta')
-		}
-	}
-
-	return {
-		handleAddCategory,
-	}
-}
+import { useCategories } from '@/hooks/game/useCategories'
 
 function CategoryPicker() {
 	const { handleAddCategory } = useCategories()
