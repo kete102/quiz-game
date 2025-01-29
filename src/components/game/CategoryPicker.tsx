@@ -2,6 +2,7 @@ import { Plus } from 'lucide-react'
 import { CATEGORIES } from '../../utils/constants'
 import { useGameStore } from '@/store/game/store'
 import { useCategories } from '@/hooks/game/useCategories'
+import clsx from 'clsx'
 
 function CategoryPicker() {
 	const { handleAddCategory } = useCategories()
@@ -21,7 +22,12 @@ function CategoryPicker() {
 						id={category.apiValue}
 						onClick={handleAddCategory}
 						key={category.id}
-						className={`inline-flex cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] transition-all focus:scale-103 ${categories.includes(category.apiValue) ? 'selected-category' : ''}`}
+						className={clsx(
+							'inline-flex cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] transition-all focus:scale-103',
+							{
+								'selected-category': categories.includes(category.apiValue),
+							}
+						)}
 					>
 						<span className='flex items-center gap-x-1'>
 							{category.name} {category.icon}
