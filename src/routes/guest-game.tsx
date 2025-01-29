@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import Wizzard from '../components/game/Wizzard'
 import { ArrowRight } from 'lucide-react'
 import { SignInButton } from '@clerk/clerk-react'
+import Footer from '@/components/Footer'
 
 export const Route = createFileRoute('/guest-game')({
 	component: RouteComponent,
@@ -9,15 +10,16 @@ export const Route = createFileRoute('/guest-game')({
 
 function RouteComponent() {
 	return (
-		<div className='w-full select-none space-y-2 h-screen grid place-content-evenly'>
-			<Wizzard />
+		<div className='mx-auto flex h-screen w-full max-w-4xl flex-col space-y-2 pt-2 select-none'>
 			<section className='w-full text-center'>
-				<SignInButton>
-					<button className='text-lg cursor-pointer tracking-wide hover:scale-103 px-6 py-4 hover:shadow-2xl bg-white/5 rounded-lg transition-all font-medium inline-flex items-center underline underline-offset-2 gap-x-2'>
+				<SignInButton mode='modal'>
+					<button className='mb-2 inline-flex w-full cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-white/5 px-5 py-3 text-center text-2xl font-medium shadow-xs shadow-neutral-300/50 transition-all hover:scale-103 hover:shadow-md md:text-2xl'>
 						Sign in to save your progress <ArrowRight />
 					</button>
 				</SignInButton>
 			</section>
+			<Wizzard />
+			<Footer />
 		</div>
 	)
 }

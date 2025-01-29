@@ -14,23 +14,23 @@ function Wizzard() {
 	}
 
 	return (
-		<div className='w-full space-y-2 h-full items-center justify-evenly flex flex-col'>
-			<h2 className='opacity-80 font-bold tracking-wider mb-6 text-3xl md:text-4xl'>
+		<div className='flex h-full w-full flex-col items-center justify-start'>
+			<h2 className='my-4 w-full text-start text-4xl font-bold tracking-wider opacity-80 sm:text-center md:text-4xl lg:my-6'>
 				Game preferences
 			</h2>
-			<section className='flex-1 p-2 flex flex-col md:flex-row justify-start  md:items-start w-full space-y-4  pt-4 rounded-md'>
+			<section className='my-3 flex w-full flex-col justify-start space-y-4 rounded-md p-2 md:flex-row md:items-start'>
 				<CategoryPicker />
 				<Difficultypicker />
 			</section>
-			<section className='w-full p-2 flex flex-col md:flex-row justify-center gap-2 items-center'>
+			<section className='flex w-full flex-col items-center justify-center gap-2 p-2 md:flex-row'>
 				<button
-					className='font-normal bg-emerald-400/50 hover:bg-emerald-400 text-green-300  focus:bg-emerald-400 select-none tracking-tight w-full md:text-xl lg:max-w-xl  hover:text-green-800 text-lg px-4 py-3 rounded-md  hover:font-medium transition-all hover:shadow-xl hover:scale-102 border-none cursor-pointer hover:border-white'
+					className='w-full cursor-pointer rounded-md border-none bg-emerald-400/50 px-4 py-3 text-lg font-normal tracking-tight text-green-300 transition-all select-none hover:scale-102 hover:border-white hover:bg-emerald-400 hover:font-medium hover:text-green-800 hover:shadow-xl focus:bg-emerald-400 md:text-xl lg:max-w-xl'
 					onClick={handleStartGame}
 				>
 					Start game
 				</button>
 				<button
-					className='font-normal select-none bg-rose-400/50 hover:bg-rose-400 tracking-tight w-full md:text-xl lg:max-w-xl text-red-300 hover:text-red-800 hover:font-medium focus:bg-rose-400 text-lg px-4 py-3 rounded-md  transition-all hover:shadow-xl hover:scale-102 border-none cursor-pointer hover:border-white'
+					className='w-full cursor-pointer rounded-md border-none bg-rose-400/50 px-4 py-3 text-lg font-normal tracking-tight text-red-300 transition-all select-none hover:scale-102 hover:border-white hover:bg-rose-400 hover:font-medium hover:text-red-800 hover:shadow-xl focus:bg-rose-400 md:text-xl lg:max-w-xl'
 					onClick={handleQuitGame}
 				>
 					Quit game
