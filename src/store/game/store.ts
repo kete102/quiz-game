@@ -1,5 +1,9 @@
 import { create } from 'zustand'
-import { Category, Difficulty } from '../../services/api/types'
+import {
+	Category,
+	DifficultiesApiValueSchema,
+	Difficulty,
+} from '../../services/api/types'
 
 interface Question {
 	id: string
@@ -14,14 +18,16 @@ interface Question {
 
 interface GameStore {
 	questions: Question[] | null
+	difficulty: DifficultiesApiValueSchema
+	isGameActive: boolean
+	categories: Category['apiValue'][]
 	currentQuestionIndex: number
 	selectedAnswers: string[] | null
 	score: number
 	timeRemaining: number
-	isGameActive: boolean
-	categories: Category['apiValue'][]
 
 	setQuestion: (questions: Question[]) => void
+	setDifficulty: (difficulty: DifficultiesApiValueSchema) => void
 	setCurrentQuestionIndex: (index: number) => void
 	setSelectedAnswers: (asnwers: string[]) => void
 	setCategories: (category: Category['apiValue']) => void
@@ -32,14 +38,19 @@ interface GameStore {
 
 export const useGameStore = create<GameStore>((set) => ({
 	questions: null,
+	difficulty: 'medium',
+	isGameActive: false,
+	categories: ['general_knowledge'],
 	currentQuestionIndex: 0,
 	selectedAnswers: null,
-	categories: ['general_knowledge'],
 	score: 0,
 	timeRemaining: 0,
-	isGameActive: false,
 
 	setQuestion: (questions) => set((state) => ({ ...state, questions })),
+	setDifficulty: (newDifficulty) =>
+		set((state) => ({
+			difficulty: state.difficulty === newDifficulty ? 'medium' : newDifficulty,
+		})),
 	setCurrentQuestionIndex: (index) =>
 		set((state) => ({ ...state, currentQuestionIndex: index })),
 	setSelectedAnswers: (answers) =>

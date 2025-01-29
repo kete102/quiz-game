@@ -35,7 +35,7 @@ export type Category = {
 /*
  * Difficulty
  * */
-const DifficultiesApiValue = z.enum(['easy', 'medium', 'hard'])
+export const DifficultiesApiValue = z.enum(['easy', 'medium', 'hard'])
 
 export type DifficultiesApiValueSchema = z.infer<typeof DifficultiesApiValue>
 

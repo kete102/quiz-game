@@ -24,7 +24,25 @@
 }
 
 .selected-category {
-	color: white;
-	border: 2px oklch(0.765 0.177 163.223) solid;
-	background-color: oklch(0.432 0.095 166.913);
+	color: var(--color-green-950);
+	border: 2px var(--color-green-900) solid;
+	background-color: var(--color-green-400);
+}
+
+.selected-easy-difficulty {
+	color: var(--color-green-950);
+	border: 2px var(--color-green-900) solid;
+	background-color: var(--color-green-400);
+}
+
+.selected-medium-difficulty {
+	color: var(--color-amber-950);
+	border: 2px var(--color-amber-900) solid;
+	background-color: var(--color-amber-400);
+}
+
+.selected-hard-difficulty {
+	color: var(--color-red-950);
+	border: 2px var(--color-red-900) solid;
+	background-color: var(--color-red-400);
 }
