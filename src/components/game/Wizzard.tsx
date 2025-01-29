@@ -14,6 +14,7 @@ function Wizzard() {
 
 	const handleStartGame = () => {
 		console.log('Start game')
+		setIsGameActive(true)
 	}
 
 	return (
