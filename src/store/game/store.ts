@@ -25,6 +25,9 @@ interface GameStore {
 	selectedAnswers: string[] | null
 	score: number
 	timeRemaining: number
+	correctAnswers: number
+	incorrectAnswers: number
+	totalQuestions: number
 
 	setQuestion: (questions: Question[]) => void
 	setDifficulty: (difficulty: DifficultiesApiValueSchema) => void
@@ -45,6 +48,9 @@ export const useGameStore = create<GameStore>((set) => ({
 	selectedAnswers: null,
 	score: 0,
 	timeRemaining: 0,
+	correctAnswers: 0,
+	incorrectAnswers: 0,
+	totalQuestions: 0,
 
 	setQuestion: (questions) => set((state) => ({ ...state, questions })),
 	setDifficulty: (newDifficulty) =>
