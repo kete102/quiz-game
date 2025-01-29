@@ -1,71 +1,37 @@
-import { SignedIn, SignedOut, SignInButton, useAuth } from '@clerk/clerk-react'
-import { createFileRoute, Link, Navigate } from '@tanstack/react-router'
-import React from 'react'
-import Footer from '../components/Footer'
-import { useGameStore } from '../store/game/store'
+import { SignedIn, useAuth } from '@clerk/clerk-react'
+import { createFileRoute, Navigate } from '@tanstack/react-router'
+import Hero from '@/components/login/Hero'
+import Login from '@/components/login/Login'
+import Github from '@/components/icons/Github'
 
 export const Route = createFileRoute('/login')({
 	component: RouteComponent,
 })
 
 function RouteComponent() {
-	const { setIsGameActive } = useGameStore()
 	const { isSignedIn } = useAuth()
 
-	const handleStartGuestGame = () => {
-		setIsGameActive(true)
-	}
-
 	return (
-		<React.Fragment>
+		<div className='mx-auto h-screen w-full pt-20'>
 			{!isSignedIn && (
-				<div className='w-full h-screen flex flex-col justify-center items-center p-6'>
+				<div className='flex h-full w-full flex-col items-center justify-start gap-y-5 p-6 md:gap-y-10'>
 					{/* Header Section */}
-					<section className='text-center space-y-4'>
-						<h1 className='font-bold text-5xl text-white'>
-							Welcome to the Quiz Game 🤔
-						</h1>
-						<p className='opacity-80 text-lg text-gray-300'>
-							Think fast. Play smart. Have fun!
-						</p>
-					</section>
-
+					<Hero />
 					{/* Login Section */}
-					<section className='mt-10 text-center shadow-xl bg-black/40 rounded-lg p-8 md:p-16 space-y-8 w-full max-w-md'>
-						<p className='text-2xl text-white font-semibold'>
-							Log in to save your progress
-						</p>
-
-						{/* Sign In Button */}
-						<SignedOut>
-							<SignInButton mode='modal'>
-								<button className='w-full text-lg px-6 py-3 bg-blue-600 cursor-pointer text-white rounded-lg transition-all hover:scale-105 shadow-lg hover:shadow-2xl'>
-									Sign In
-								</button>
-							</SignInButton>
-						</SignedOut>
-
-						{/* Or Divider */}
-						<div className='flex items-center justify-center space-x-4'>
-							<span className='w-1/3 h-px bg-gray-500'></span>
-							<span className='text-gray-400 font-medium'>or</span>
-							<span className='w-1/3 h-px bg-gray-500'></span>
-						</div>
-
-						{/* Play as Guest */}
-						<button
-							onClick={handleStartGuestGame}
-							className='w-full text-lg px-6 py-3 bg-gray-700 text-gray-300 cursor-pointer  rounded-lg transition-all hover:scale-105 hover:bg-gray-600 shadow-lg'
-						>
-							<Link to='/guest-game'>Play as Guest</Link>
-						</button>
-					</section>
+					<Login />
 				</div>
 			)}
+			<section className='absolute right-10 bottom-10'>
+				<a
+					href='https://github.com/kete102/quiz-game'
+					className='inline-flex items-center gap-x-2 rounded-lg bg-white/5 p-3 underline shadow-2xl transition-all hover:scale-103'
+				>
+					Check the code here <Github className='size-5' />
+				</a>
+			</section>
 			<SignedIn>
 				<Navigate to='/dashboard' />
 			</SignedIn>
-			<Footer />
-		</React.Fragment>
+		</div>
 	)
 }
