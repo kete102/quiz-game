@@ -22,3 +22,9 @@
 		background: linear-gradient(to right, #cbd5e1, #64748b);
 	}
 }
+
+.selected-category {
+	color: white;
+	border: 2px oklch(0.765 0.177 163.223) solid;
+	background-color: oklch(0.432 0.095 166.913);
+}

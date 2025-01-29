@@ -3,14 +3,15 @@ import { CATEGORIES } from '../../utils/constants'
 import { useGameStore } from '@/store/game/store'
 import { CategoriesApiValue } from '@/services/api/types.ts'
 
-function CategoryPicker() {
-	const { categories, setCategories } = useGameStore()
+function useCategories() {
+	const { setCategories } = useGameStore()
 
 	const handleAddCategory = (
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {
+		const button = event.currentTarget
 		const { success, data: newCategory } = CategoriesApiValue.safeParse(
-			event.currentTarget.id
+			button.id
 		)
 		if (success) {
 			setCategories(newCategory)
@@ -19,7 +20,14 @@ function CategoryPicker() {
 		}
 	}
 
-	console.log({ categories })
+	return {
+		handleAddCategory,
+	}
+}
+
+function CategoryPicker() {
+	const { handleAddCategory } = useCategories()
+	const { categories } = useGameStore()
 
 	return (
 		<section className='w-full p-2'>
@@ -35,7 +43,7 @@ function CategoryPicker() {
 						id={category.apiValue}
 						onClick={handleAddCategory}
 						key={category.id}
-						className='inline-flex cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] active:border-green-800'
+						className={`inline-flex cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] transition-all focus:scale-103 ${categories.includes(category.apiValue) ? 'selected-category' : ''}`}
 					>
 						<span className='flex items-center gap-x-1'>
 							{category.name} {category.icon}
