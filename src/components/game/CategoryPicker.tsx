@@ -23,7 +23,7 @@ function CategoryPicker() {
 						onClick={handleAddCategory}
 						key={category.id}
 						className={clsx(
-							'inline-flex cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] font-medium transition-all focus:scale-103',
+							'tranform inline-flex cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] font-medium transition-all duration-200 focus:scale-103 active:scale-95',
 							{
 								'selected-category': categories.includes(category.apiValue),
 							}

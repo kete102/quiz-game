@@ -42,7 +42,7 @@ function Difficultypicker() {
 						key={difficulty.id}
 						onClick={(e) => handleAddDifficulties(e)}
 						className={clsx(
-							`inline-flex cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] font-medium transition-all`,
+							`inline-flex transform cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] font-medium transition-all duration-200 active:scale-95`,
 							{
 								'selected-easy-difficulty':
 									storeDifficulty === difficulty.apiValue &&

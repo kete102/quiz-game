@@ -2,6 +2,7 @@ import { useAuth } from '@clerk/clerk-react'
 import { useGameStore } from '../../store/game/store'
 import CategoryPicker from './CategoryPicker'
 import Difficultypicker from './DifficultyPicker'
+import { Rocket } from 'lucide-react'
 
 function Wizzard() {
 	const { isSignedIn } = useAuth()
@@ -26,14 +27,14 @@ function Wizzard() {
 			</section>
 			<section className='flex w-full flex-col items-center justify-center gap-2 p-2 md:flex-row'>
 				<button
-					className='w-full cursor-pointer rounded-md border-none bg-emerald-400/50 px-4 py-3 text-lg font-normal tracking-tight text-green-300 transition-all select-none hover:scale-102 hover:border-white hover:bg-emerald-400 hover:font-medium hover:text-green-800 hover:shadow-xl focus:bg-emerald-400 md:text-xl'
+					className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-md border-none bg-blue-800/50 px-4 py-3 text-xl font-semibold tracking-wide text-blue-300 transition-all duration-200 select-none hover:scale-102 hover:border-white hover:font-medium hover:shadow-xl active:scale-95 md:text-2xl'
 					onClick={handleStartGame}
 				>
-					Start game
+					Let's play! <Rocket className='size-6' />
 				</button>
 				{isSignedIn && (
 					<button
-						className='w-full cursor-pointer rounded-md border-none bg-rose-400/50 px-4 py-3 text-lg font-normal tracking-tight text-red-300 transition-all select-none hover:scale-102 hover:border-white hover:bg-rose-400 hover:font-medium hover:text-red-800 hover:shadow-xl focus:bg-rose-400 md:text-xl lg:max-w-xl'
+						className='w-full transform cursor-pointer rounded-md border-none bg-rose-400/50 px-4 py-3 text-lg font-normal tracking-tight text-red-300 transition-all duration-200 select-none hover:scale-102 hover:border-white hover:bg-rose-400 hover:font-medium hover:text-red-800 hover:shadow-xl focus:bg-rose-400 active:scale-95 md:text-xl lg:max-w-xl'
 						onClick={handleQuitGame}
 					>
 						Quit game
