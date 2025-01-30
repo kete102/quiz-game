@@ -16,7 +16,7 @@ interface Question {
 	difficulty: Difficulty
 }
 
-interface GameStore {
+interface State {
 	questions: Question[] | null
 	difficulty: DifficultiesApiValueSchema
 	isGameActive: boolean
@@ -28,7 +28,9 @@ interface GameStore {
 	correctAnswers: number
 	incorrectAnswers: number
 	totalQuestions: number
+}
 
+interface Actions {
 	setQuestion: (questions: Question[]) => void
 	setDifficulty: (difficulty: DifficultiesApiValueSchema) => void
 	setCurrentQuestionIndex: (index: number) => void
@@ -37,9 +39,10 @@ interface GameStore {
 	setScore: (score: number) => void
 	setTimeRemaining: (time: number) => void
 	setIsGameActive: (isActive: boolean) => void
+	resetState: () => void
 }
 
-export const useGameStore = create<GameStore>((set) => ({
+const initialState: State = {
 	questions: null,
 	difficulty: 'medium',
 	isGameActive: false,
@@ -51,12 +54,17 @@ export const useGameStore = create<GameStore>((set) => ({
 	correctAnswers: 0,
 	incorrectAnswers: 0,
 	totalQuestions: 0,
+}
+
+export const useGameStore = create<State & Actions>((set) => ({
+	...initialState,
 
 	setQuestion: (questions) => set((state) => ({ ...state, questions })),
 	setDifficulty: (newDifficulty) =>
 		set((state) => ({
 			difficulty: state.difficulty === newDifficulty ? 'medium' : newDifficulty,
 		})),
+	resetState: () => set(initialState),
 	setCurrentQuestionIndex: (index) =>
 		set((state) => ({ ...state, currentQuestionIndex: index })),
 	setSelectedAnswers: (answers) =>
