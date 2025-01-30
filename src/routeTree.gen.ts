@@ -12,9 +12,11 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
-import { Route as GuestGameImport } from './routes/guest-game'
+import { Route as GameSetupImport } from './routes/game-setup'
+import { Route as GameImport } from './routes/game'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as IndexImport } from './routes/index'
+import { Route as GuestIndexImport } from './routes/guest/index'
 
 // Create/Update Routes
 
@@ -24,9 +26,15 @@ const LoginRoute = LoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const GuestGameRoute = GuestGameImport.update({
-  id: '/guest-game',
-  path: '/guest-game',
+const GameSetupRoute = GameSetupImport.update({
+  id: '/game-setup',
+  path: '/game-setup',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const GameRoute = GameImport.update({
+  id: '/game',
+  path: '/game',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,6 +47,12 @@ const DashboardRoute = DashboardImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const GuestIndexRoute = GuestIndexImport.update({
+  id: '/guest/',
+  path: '/guest/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,11 +74,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
-    '/guest-game': {
-      id: '/guest-game'
-      path: '/guest-game'
-      fullPath: '/guest-game'
-      preLoaderRoute: typeof GuestGameImport
+    '/game': {
+      id: '/game'
+      path: '/game'
+      fullPath: '/game'
+      preLoaderRoute: typeof GameImport
+      parentRoute: typeof rootRoute
+    }
+    '/game-setup': {
+      id: '/game-setup'
+      path: '/game-setup'
+      fullPath: '/game-setup'
+      preLoaderRoute: typeof GameSetupImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -72,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/guest/': {
+      id: '/guest/'
+      path: '/guest'
+      fullPath: '/guest'
+      preLoaderRoute: typeof GuestIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -82,46 +110,63 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
-  '/guest-game': typeof GuestGameRoute
+  '/game': typeof GameRoute
+  '/game-setup': typeof GameSetupRoute
   '/login': typeof LoginRoute
+  '/guest': typeof GuestIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
-  '/guest-game': typeof GuestGameRoute
+  '/game': typeof GameRoute
+  '/game-setup': typeof GameSetupRoute
   '/login': typeof LoginRoute
+  '/guest': typeof GuestIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
-  '/guest-game': typeof GuestGameRoute
+  '/game': typeof GameRoute
+  '/game-setup': typeof GameSetupRoute
   '/login': typeof LoginRoute
+  '/guest/': typeof GuestIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/guest-game' | '/login'
+  fullPaths: '/' | '/dashboard' | '/game' | '/game-setup' | '/login' | '/guest'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/guest-game' | '/login'
-  id: '__root__' | '/' | '/dashboard' | '/guest-game' | '/login'
+  to: '/' | '/dashboard' | '/game' | '/game-setup' | '/login' | '/guest'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/game'
+    | '/game-setup'
+    | '/login'
+    | '/guest/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
-  GuestGameRoute: typeof GuestGameRoute
+  GameRoute: typeof GameRoute
+  GameSetupRoute: typeof GameSetupRoute
   LoginRoute: typeof LoginRoute
+  GuestIndexRoute: typeof GuestIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
-  GuestGameRoute: GuestGameRoute,
+  GameRoute: GameRoute,
+  GameSetupRoute: GameSetupRoute,
   LoginRoute: LoginRoute,
+  GuestIndexRoute: GuestIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -136,8 +181,10 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/dashboard",
-        "/guest-game",
-        "/login"
+        "/game",
+        "/game-setup",
+        "/login",
+        "/guest/"
       ]
     },
     "/": {
@@ -146,11 +193,17 @@ export const routeTree = rootRoute
     "/dashboard": {
       "filePath": "dashboard.tsx"
     },
-    "/guest-game": {
-      "filePath": "guest-game.tsx"
+    "/game": {
+      "filePath": "game.tsx"
+    },
+    "/game-setup": {
+      "filePath": "game-setup.tsx"
     },
     "/login": {
       "filePath": "login.tsx"
+    },
+    "/guest/": {
+      "filePath": "guest/index.tsx"
     }
   }
 }
