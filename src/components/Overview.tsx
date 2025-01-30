@@ -1,14 +1,13 @@
 import { ArrowRight } from 'lucide-react'
-import { useGameStore } from '../store/game/store'
 import PlayerStats from './game/PlayerStats'
 import { useUser } from '@clerk/clerk-react'
+import { useNavigate } from '@tanstack/react-router'
 
 function Overview() {
 	const { user } = useUser()
-	const { setIsGameActive } = useGameStore()
-	const handleStartGame = () => {
-		setIsGameActive(true)
-	}
+	const navigate = useNavigate()
+
+	const handleStartGame = () => navigate({ to: '/game-setup' })
 
 	return (
 		<div className='h-full w-full space-y-4'>

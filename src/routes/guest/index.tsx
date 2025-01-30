@@ -1,18 +1,16 @@
 import { createFileRoute } from '@tanstack/react-router'
-import Wizzard from '../components/game/Wizzard'
 import { ArrowRight } from 'lucide-react'
 import { SignInButton, useAuth } from '@clerk/clerk-react'
 import Footer from '@/components/Footer'
-import { useGameStore } from '@/store/game/store'
-import Game from '@/components/game/Game'
+import Wizzard from '@/components/game/Wizzard'
 
-export const Route = createFileRoute('/guest-game')({
+export const Route = createFileRoute('/guest/')({
 	component: RouteComponent,
 })
 
 function RouteComponent() {
 	const { isSignedIn } = useAuth()
-	const { isGameActive } = useGameStore()
+
 	return (
 		<div className='mx-auto flex h-screen w-full max-w-4xl flex-col space-y-2 pt-2 select-none'>
 			<section className='w-full text-center'>
@@ -24,8 +22,7 @@ function RouteComponent() {
 					</SignInButton>
 				)}
 			</section>
-			{!isGameActive && <Wizzard />}
-			{isGameActive && <Game />}
+			<Wizzard />
 			<Footer />
 		</div>
 	)
