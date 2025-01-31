@@ -10,13 +10,13 @@ function Overview() {
 	const handleStartGame = () => navigate({ to: '/game-setup' })
 
 	return (
-		<div className='h-full w-full space-y-4'>
-			<section className='flex w-full flex-col justify-between space-y-4 md:flex-row md:items-center'>
-				<h1 className='text-3xl tracking-wider opacity-80 md:text-4xl'>
-					Hi, {user?.firstName}👋
+		<div className='h-full w-full space-y-2 select-none'>
+			<section className='flex w-full flex-col items-center gap-y-2 md:flex-row md:justify-between'>
+				<h1 className='inline-flex items-center gap-x-2 text-3xl tracking-wider opacity-80 md:text-4xl'>
+					Hi, <span>{user?.firstName}👋</span>
 				</h1>
 				<button
-					className='inline-flex cursor-pointer items-center gap-x-1.5 rounded-md border-none bg-white/5 px-4 py-3 text-xl font-normal tracking-tight text-white/60 transition-all select-none hover:scale-105 hover:border-white hover:font-medium hover:text-white hover:shadow-xl'
+					className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-lg border-none bg-black/10 px-4 py-3 text-2xl font-medium tracking-normal text-white shadow-md transition-all duration-200 hover:scale-103 hover:shadow-2xl active:scale-97 active:shadow-2xl md:w-fit'
 					onClick={handleStartGame}
 				>
 					Start a new game! <ArrowRight />
