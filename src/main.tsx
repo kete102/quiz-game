@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+import './styles.css'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { VITE_CLERK_PUBLISHABLE_KEY } from './utils/config.ts'
 import App from './App.tsx'
