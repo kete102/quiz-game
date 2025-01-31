@@ -19,7 +19,7 @@ function RouteComponent() {
 	return (
 		<div className='flex min-h-screen w-full flex-col p-2'>
 			<Header />
-			<main className='container mx-auto mt-8 h-full max-w-[1100px] grow rounded-lg p-2 text-4xl font-semibold'>
+			<main className='container mx-auto mt-4 h-full max-w-[1100px] grow rounded-lg p-2 text-4xl font-semibold md:mt-8'>
 				<Overview />
 			</main>
 			<Footer />
