@@ -6,7 +6,11 @@ import path from 'node:path'
 
 // https://vite.dev/config/
 export default defineConfig({
-	plugins: [react(), tailwindcss(), TanStackRouterVite()],
+	plugins: [
+		react(),
+		tailwindcss(),
+		TanStackRouterVite({ autoCodeSplitting: true }),
+	],
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, './src'),
