@@ -1,7 +1,5 @@
 import { Category, Difficulty } from '../services/api/types'
 
-export const clerkApiKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
-
 export const CATEGORIES: Category[] = [
 	{ id: 0, name: 'Music', icon: '🎹', apiValue: 'music' },
 	{ id: 1, name: 'Sports', icon: '⚽', apiValue: 'sport_and_leisure' },

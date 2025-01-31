@@ -1,26 +1,18 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { createRouter, RouterProvider } from '@tanstack/react-router'
-import { routeTree } from './routeTree.gen.ts'
 import { ClerkProvider } from '@clerk/clerk-react'
-import { clerkApiKey } from './utils/constants.ts'
+import { VITE_CLERK_PUBLISHABLE_KEY } from './utils/config.ts'
+import App from './App.tsx'
 
-const router = createRouter({ routeTree })
+if (!VITE_CLERK_PUBLISHABLE_KEY)
+	throw new Error('Clerk Error: Missing publishable key')
 
-// Register the router instance for type safety
-declare module '@tanstack/react-router' {
-	interface Register {
-		router: typeof router
-	}
-}
-
-if (!clerkApiKey) throw new Error('Clerk Error: Missing publishable key')
-
+console.log(VITE_CLERK_PUBLISHABLE_KEY)
 createRoot(document.getElementById('root')!).render(
-	<ClerkProvider publishableKey={clerkApiKey}>
+	<ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
 		<StrictMode>
-			<RouterProvider router={router} />
+			<App />
 		</StrictMode>
 	</ClerkProvider>
 )
