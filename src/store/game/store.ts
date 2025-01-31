@@ -24,7 +24,6 @@ interface State {
 	currentQuestionIndex: number
 	selectedAnswers: string[] | null
 	score: number
-	timeRemaining: number
 	correctAnswers: number
 	incorrectAnswers: number
 	totalQuestions: number
@@ -37,7 +36,6 @@ interface Actions {
 	setSelectedAnswers: (asnwers: string[]) => void
 	setCategories: (category: Category['apiValue']) => void
 	setScore: (score: number) => void
-	setTimeRemaining: (time: number) => void
 	setIsGameActive: (isActive: boolean) => void
 	resetState: () => void
 }
@@ -50,7 +48,6 @@ const initialState: State = {
 	currentQuestionIndex: 0,
 	selectedAnswers: null,
 	score: 0,
-	timeRemaining: 0,
 	correctAnswers: 0,
 	incorrectAnswers: 0,
 	totalQuestions: 0,
@@ -70,8 +67,6 @@ export const useGameStore = create<State & Actions>((set) => ({
 	setSelectedAnswers: (answers) =>
 		set((state) => ({ ...state, selectedAnswers: answers })),
 	setScore: (score) => set((state) => ({ ...state, score })),
-	setTimeRemaining: (timeRemaining) =>
-		set((state) => ({ ...state, timeRemaining })),
 	setIsGameActive: (isGameActive) =>
 		set((state) => ({ ...state, isGameActive })),
 	setCategories: (category: Category['apiValue']) =>
