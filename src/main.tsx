@@ -8,7 +8,6 @@ import App from './App.tsx'
 if (!VITE_CLERK_PUBLISHABLE_KEY)
 	throw new Error('Clerk Error: Missing publishable key')
 
-console.log(VITE_CLERK_PUBLISHABLE_KEY)
 createRoot(document.getElementById('root')!).render(
 	<ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
 		<StrictMode>
