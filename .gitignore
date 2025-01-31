@@ -28,5 +28,3 @@ dist-ssr
 # Prisma
 dev.db
 
-# TanStack
-routeTree.gen.ts
