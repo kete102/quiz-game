@@ -16,11 +16,11 @@ function Wizzard() {
 	const handleStartGame = () => navigate({ to: '/game' })
 
 	return (
-		<div className='flex h-full w-full flex-col items-center justify-start'>
+		<div className='mx-auto flex h-full w-full max-w-3xl flex-col items-center justify-start'>
 			<h2 className='my-4 w-full text-center text-4xl font-bold tracking-wider opacity-80 md:text-4xl lg:my-6'>
 				Game preferences
 			</h2>
-			<section className='my-3 flex w-full flex-col justify-start space-y-4 rounded-md p-2 md:flex-row md:items-start'>
+			<section className='my-3 flex w-full flex-col justify-start space-y-4 rounded-md p-2 md:flex-row md:items-start md:gap-x-4'>
 				<CategoryPicker />
 				<Difficultypicker />
 			</section>
