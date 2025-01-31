@@ -20,7 +20,7 @@ function RouteComponent() {
 	}, [resetState])
 
 	return (
-		<div className='flex h-screen w-full flex-col items-center justify-between p-2'>
+		<div className='flex h-screen w-full flex-col items-center justify-between p-2 md:gap-y-10'>
 			<Header />
 			<Game />
 			<Footer />
