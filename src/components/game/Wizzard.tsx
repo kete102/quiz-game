@@ -3,21 +3,31 @@ import Difficultypicker from './DifficultyPicker'
 import { LogOut, Rocket } from 'lucide-react'
 import { useNavigate } from '@tanstack/react-router'
 import { useAuth } from '@clerk/clerk-react'
-import { useQuestions } from '@/hooks/game/useQuestions'
+import { useGameSetup } from '@/hooks/game/useGameSetup'
 
 function Wizzard() {
+	const {
+		handleSelectCategories,
+		handleSelectDifficulty,
+		categories,
+		difficulty,
+	} = useGameSetup()
 	const { isSignedIn } = useAuth()
 	const navigate = useNavigate()
-	const { getQuestions } = useQuestions()
 
 	const handleQuitGame = () => {
 		console.log('Quit game: ', isSignedIn)
 		navigate({ to: '/' })
 	}
 
-	const handleStartGame = () => {
-		getQuestions()
-		navigate({ to: '/game' })
+	const handleStartGame = async () => {
+		navigate({
+			to: '/game',
+			search: {
+				categories,
+				difficulty,
+			},
+		})
 	}
 
 	return (
@@ -26,8 +36,14 @@ function Wizzard() {
 				Game preferences
 			</h2>
 			<section className='my-3 flex w-full flex-col justify-start space-y-4 rounded-md p-2 md:flex-row md:items-start md:gap-x-4'>
-				<CategoryPicker />
-				<Difficultypicker />
+				<CategoryPicker
+					categories={categories}
+					selectCategories={handleSelectCategories}
+				/>
+				<Difficultypicker
+					difficulty={difficulty}
+					selectDifficulty={handleSelectDifficulty}
+				/>
 			</section>
 			<section className='flex w-full flex-col items-center justify-center gap-2 p-2 md:flex-row'>
 				<button
