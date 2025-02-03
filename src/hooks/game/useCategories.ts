@@ -1,4 +1,4 @@
-import { CategoriesApiValue } from '@/services/api/types.ts'
+import { CategoriesApiValue } from '@/services/game/questions/types'
 import { useGameStore } from '@/store/game/store'
 
 export function useCategories() {
