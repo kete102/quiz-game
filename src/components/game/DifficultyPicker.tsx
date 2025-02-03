@@ -1,8 +1,8 @@
 import { Check } from 'lucide-react'
-import { Difficulty } from '../../services/api/types'
+import { Difficulty } from '../../services/game/questions/types'
 import { DIFFICULTIES } from '../../utils/constants'
 import { useGameStore } from '@/store/game/store'
-import { DifficultiesApiValue } from '@/services/api/types'
+import { DifficultiesApiValue } from '@/services/game/questions/types'
 import clsx from 'clsx'
 
 function useDifficulties() {

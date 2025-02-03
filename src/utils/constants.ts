@@ -1,4 +1,4 @@
-import { Category, Difficulty } from '../services/api/types'
+import { Category, Difficulty } from '../services/game/questions/types'
 
 export const CATEGORIES: Category[] = [
 	{ id: 0, name: 'Music', icon: '🎹', apiValue: 'music' },

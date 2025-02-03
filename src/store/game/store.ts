@@ -3,9 +3,9 @@ import {
 	Category,
 	DifficultiesApiValueSchema,
 	Difficulty,
-} from '../../services/api/types'
+} from '../../services/game/questions/types'
 
-interface Question {
+export interface Question {
 	id: string
 	category: Category
 	correctAnswer: string

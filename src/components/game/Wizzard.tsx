@@ -3,17 +3,22 @@ import Difficultypicker from './DifficultyPicker'
 import { LogOut, Rocket } from 'lucide-react'
 import { useNavigate } from '@tanstack/react-router'
 import { useAuth } from '@clerk/clerk-react'
+import { useQuestions } from '@/hooks/game/useQuestions'
 
 function Wizzard() {
 	const { isSignedIn } = useAuth()
 	const navigate = useNavigate()
+	const { getQuestions } = useQuestions()
 
 	const handleQuitGame = () => {
 		console.log('Quit game: ', isSignedIn)
 		navigate({ to: '/' })
 	}
 
-	const handleStartGame = () => navigate({ to: '/game' })
+	const handleStartGame = () => {
+		getQuestions()
+		navigate({ to: '/game' })
+	}
 
 	return (
 		<div className='mx-auto flex h-full w-full max-w-3xl flex-col items-center justify-start'>
