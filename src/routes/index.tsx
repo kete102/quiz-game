@@ -1,21 +1,14 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, Navigate } from '@tanstack/react-router'
 import Header from '@/components/Header'
 import Overview from '@/components/Overview'
 import Footer from '@/components/Footer'
-import { useAuth } from '@clerk/clerk-react'
-import React from 'react'
+import { SignedOut } from '@clerk/clerk-react'
 
 export const Route = createFileRoute('/')({
 	component: RouteComponent,
 })
 
 function RouteComponent() {
-	const { isSignedIn, isLoaded } = useAuth()
-	const navigate = useNavigate()
-
-	React.useEffect(() => {
-		if (isLoaded && !isSignedIn) navigate({ to: '/login' })
-	}, [isLoaded, isSignedIn, navigate])
 	return (
 		<div className='flex min-h-screen w-full flex-col p-2'>
 			<Header />
@@ -23,6 +16,9 @@ function RouteComponent() {
 				<Overview />
 			</main>
 			<Footer />
+			<SignedOut>
+				<Navigate to='/login' />
+			</SignedOut>
 		</div>
 	)
 }

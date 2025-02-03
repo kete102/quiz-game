@@ -1,22 +1,15 @@
-import { useAuth } from '@clerk/clerk-react'
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { SignedIn, useAuth } from '@clerk/clerk-react'
+import { createFileRoute, Navigate } from '@tanstack/react-router'
 import Hero from '@/components/login/Hero'
 import Login from '@/components/login/Login'
 import Github from '@/components/icons/Github'
-import React from 'react'
 
 export const Route = createFileRoute('/login')({
 	component: RouteComponent,
 })
 
 function RouteComponent() {
-	const { isSignedIn, isLoaded } = useAuth()
-	const navigate = useNavigate()
-
-	React.useEffect(() => {
-		if (isLoaded && isSignedIn) navigate({ to: '/' })
-	}, [isLoaded, isSignedIn, navigate])
-
+	const { isSignedIn } = useAuth()
 	return (
 		<div className='mx-auto h-screen w-full pt-20'>
 			{!isSignedIn && (
@@ -35,6 +28,9 @@ function RouteComponent() {
 					Check the code here <Github className='size-5' />
 				</a>
 			</section>
+			<SignedIn>
+				<Navigate to='/' />
+			</SignedIn>
 		</div>
 	)
 }
