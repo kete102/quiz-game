@@ -13,18 +13,18 @@ import { useEffect } from 'react'
 export const Route = createFileRoute('/game')({
 	validateSearch: ({
 		categories,
-		difficulty,
+		difficulties,
 	}: {
 		categories: CategoriesApiValueSchema[]
-		difficulty: DifficultiesApiValueSchema
+		difficulties: DifficultiesApiValueSchema
 	}) => ({
 		categories,
-		difficulty,
+		difficulties,
 	}),
 	beforeLoad: async ({ search }) => {
 		const questions = await FetchQuestions({
 			categories: search.categories as CategoriesApiValueSchema[],
-			difficulty: search.difficulty as DifficultiesApiValueSchema,
+			difficulty: search.difficulties as DifficultiesApiValueSchema,
 		})
 
 		if (!questions) throw new Error('Failed to fetch questions')

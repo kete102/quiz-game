@@ -25,7 +25,7 @@ function Wizzard() {
 			to: '/game',
 			search: {
 				categories,
-				difficulty,
+				difficulties: difficulty,
 			},
 		})
 	}
