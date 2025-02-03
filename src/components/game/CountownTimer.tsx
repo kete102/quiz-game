@@ -1,3 +1,4 @@
+import { useGameStore } from '@/store/game/store'
 import clsx from 'clsx'
 import { Timer } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
@@ -9,6 +10,7 @@ interface Props {
 }
 
 function CountdownTimer({ padding = 3, duration = 0.5 }: Props) {
+	const { endGame } = useGameStore()
 	const [timer, setTimer] = useState<number>(600)
 
 	useEffect(() => {
@@ -26,11 +28,7 @@ function CountdownTimer({ padding = 3, duration = 0.5 }: Props) {
 	}, [])
 
 	if (timer == 0) {
-		return (
-			<span className='w-full text-center text-4xl font-bold md:text-3xl'>
-				Time finished 🚨
-			</span>
-		)
+		endGame()
 	}
 
 	const displayValues = timer.toString().padStart(padding, '0').split('')
