@@ -34,11 +34,11 @@ function CountdownTimer({ time: value, padding = 3, duration = 0.5 }: Props) {
 							duration: duration,
 						}}
 						className={clsx(
-							'inline-block rounded-md p-1.5 font-sans text-4xl font-bold tabular-nums transition-all md:text-5xl',
-							{ 'bg-green-600/60': value >= 150 },
-							{ 'bg-orange-600/60': value >= 50 && value <= 149 },
-							{ 'bg-red-600/60': value >= 11 && value <= 49 },
-							{ 'animate-pulse bg-red-400': value <= 11 }
+							'inline-block rounded-md font-sans text-4xl font-bold tabular-nums transition-all md:text-5xl',
+							{ 'text-green-600/60': value >= 150 },
+							{ 'text-orange-600/60': value >= 50 && value <= 149 },
+							{ 'text-red-600/60': value >= 11 && value <= 49 },
+							{ 'animate-pulse text-red-400': value <= 11 }
 						)}
 						layout
 						key={`${number}-${index}`}
