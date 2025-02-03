@@ -20,7 +20,7 @@ function RouteComponent() {
 					<Login />
 				</div>
 			)}
-			<section className='absolute right-10 bottom-10'>
+			<section className='absolute right-10 bottom-10 text-white'>
 				<a
 					href='https://github.com/kete102/quiz-game'
 					className='inline-flex items-center gap-x-2 rounded-lg bg-white/5 p-3 underline shadow-2xl transition-all hover:scale-103'
