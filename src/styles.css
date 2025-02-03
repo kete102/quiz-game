@@ -2,7 +2,7 @@
 
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-	color-scheme: light dark;
+	color-scheme: light;
 	background: linear-gradient(to right, #64748b, #1e293b);
 
 	font-synthesis: none;
@@ -14,12 +14,6 @@
 		display: none;
 		scrollbar-width: none;
 		-ms-overflow-style: none;
-	}
-}
-
-@media (prefers-color-scheme: light) {
-	:root {
-		background: linear-gradient(to right, #cbd5e1, #64748b);
 	}
 }
 
