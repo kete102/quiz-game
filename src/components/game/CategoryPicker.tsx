@@ -13,8 +13,9 @@ function CategoryPicker() {
 			<h2 className='text-2xl font-semibold text-white opacity-80 md:text-3xl'>
 				Categories
 			</h2>
-			<p className='text-lg text-zinc-400'>
-				Playing with <i className='font-medium'>general knowledge</i> by default
+			<p className='text-lg font-medium text-zinc-400'>
+				Playing with <i className='font-semibold'>general knowledge</i> by
+				default
 			</p>
 			<div className='mt-4 flex w-full max-w-xl flex-wrap items-center gap-2'>
 				{CATEGORIES.map((category) => (

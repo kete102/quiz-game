@@ -13,7 +13,7 @@ function GameInfo({
 	incorrectAnswers,
 }: Props) {
 	return (
-		<section className='flex w-full flex-col items-center px-4 md:max-w-2xl lg:max-w-3xl'>
+		<section className='flex w-full flex-col items-center px-4 text-white md:max-w-2xl lg:max-w-3xl'>
 			<div className='flex w-full items-center justify-center gap-x-3'>
 				<h3 className='inline-flex items-center gap-x-2 rounded-md bg-black/50 p-3 text-2xl font-semibold transition-all hover:scale-103'>
 					<ListOrdered className='size-6' />

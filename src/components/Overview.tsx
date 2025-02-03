@@ -12,7 +12,7 @@ function Overview() {
 	return (
 		<div className='h-full w-full space-y-2 select-none'>
 			<section className='flex w-full flex-col items-center gap-y-2 md:flex-row md:justify-between'>
-				<h1 className='inline-flex items-center gap-x-2 text-3xl tracking-wider opacity-80 md:text-4xl'>
+				<h1 className='inline-flex items-center gap-x-2 text-3xl tracking-wider text-white opacity-80 md:text-4xl'>
 					Hi, <span>{user?.firstName}👋</span>
 				</h1>
 				<button

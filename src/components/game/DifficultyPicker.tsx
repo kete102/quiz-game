@@ -32,8 +32,9 @@ function Difficultypicker() {
 			<h2 className='text-2xl font-semibold text-white opacity-80 md:text-3xl'>
 				Difficulty
 			</h2>
-			<p className='text-lg text-zinc-400'>
-				Playing with <i className='font-medium'>noraml difficulty</i> by default
+			<p className='text-lg font-medium text-zinc-400'>
+				Playing with <i className='font-semibold'>noraml difficulty</i> by
+				default
 			</p>
 			<div className='mt-4 flex w-full max-w-xl flex-wrap items-center gap-2'>
 				{DIFFICULTIES.map((difficulty: Difficulty) => (

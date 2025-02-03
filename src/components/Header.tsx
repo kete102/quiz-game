@@ -31,7 +31,7 @@ function Header() {
 			</SignedIn>
 			<SignedOut>
 				<SignInButton mode='modal'>
-					<button className='inline-flex cursor-pointer items-center gap-x-2 text-xl transition-all hover:scale-103 hover:font-semibold active:scale-95 active:font-semibold'>
+					<button className='inline-flex cursor-pointer items-center gap-x-2 text-xl text-white transition-all hover:scale-103 hover:font-semibold active:scale-95 active:font-semibold'>
 						Sign in <ArrowRight className='size-5' />
 					</button>
 				</SignInButton>
