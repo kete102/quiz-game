@@ -36,11 +36,13 @@ export const Route = createFileRoute('/game')({
 
 function RouteComponent() {
 	const { questions } = Route.useRouteContext()
-	const { resetGame } = useGameStore()
+	const { resetGame, startGame } = useGameStore()
 
 	useEffect(() => {
+		startGame(questions)
 		return () => resetGame()
-	}, [resetGame])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<div className='flex h-screen w-full flex-col items-center justify-between p-2 md:gap-y-10'>
