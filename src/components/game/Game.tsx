@@ -1,25 +1,17 @@
-import { useGameStore } from '@/store/game/store'
+import { Question, useGameStore } from '@/store/game/store'
 import CountdownTimer from './CountownTimer'
 import GameInfo from './GameInfo'
 import AnswerButton from './AnswerButton'
 import { LogOut } from 'lucide-react'
 import { useNavigate } from '@tanstack/react-router'
 
-function Game() {
-	const {
-		correctAnswers,
-		incorrectAnswers,
-		currentQuestionIndex,
-		totalQuestions,
-		questions,
-	} = useGameStore()
+function Game({ questions }: { questions: Question[] }) {
+	const { currentQuestionIndex, nextQuestion } = useGameStore()
 	const navigate = useNavigate()
 
 	const handleQuitGame = () => {
 		navigate({ to: '/' })
 	}
-
-	console.log('Game: ', questions)
 
 	return (
 		<div className='flex h-screen w-full flex-col items-center justify-start gap-y-10'>
@@ -27,27 +19,30 @@ function Game() {
 				{/* Pregunta */}
 				<section className='grid w-full place-content-center'>
 					<p className='text-center text-2xl leading-9 font-medium text-pretty text-white md:text-2xl lg:text-3xl'>
-						Which Of The Worlds Continents Has The Highest Population?
+						{questions[currentQuestionIndex].question.text}
 					</p>
 				</section>
 				<div className='my-3 h-[2.5px] w-full rounded-full bg-zinc-100/30 md:my-5'></div>
 
 				{/* Opciones */}
 				<section className='mt-3 flex w-full flex-col items-start gap-y-4 px-2'>
-					<AnswerButton answer='Africa' />
-					<AnswerButton answer='North America' />
-					<AnswerButton answer='Europe' />
-					<AnswerButton answer='Asia' />
+					{[
+						...questions[currentQuestionIndex].incorrectAnswers,
+						questions[currentQuestionIndex].correctAnswer,
+					]
+						.sort(() => Math.random() - 0.5)
+						.map((answer, index) => (
+							<AnswerButton
+								answer={answer}
+								handleNextQuestion={nextQuestion}
+								key={`${questions[currentQuestionIndex].id}-${index}}`}
+							/>
+						))}
 				</section>
 
 				<div className='mt-4 flex w-full flex-col items-center justify-center gap-y-6 px-2 md:mt-8 md:flex-row'>
 					<CountdownTimer />
-					<GameInfo
-						currentQuestionIndex={currentQuestionIndex}
-						totalQuestions={totalQuestions}
-						correctAnswers={correctAnswers}
-						incorrectAnswers={incorrectAnswers}
-					/>
+					<GameInfo currentQuestionIndex={currentQuestionIndex} />
 					{/* Progreso y Resultados */}
 				</div>
 				<button
