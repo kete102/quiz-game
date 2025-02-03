@@ -9,7 +9,12 @@ if (!VITE_CLERK_PUBLISHABLE_KEY)
 	throw new Error('Clerk Error: Missing publishable key')
 
 createRoot(document.getElementById('root')!).render(
-	<ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
+	<ClerkProvider
+		afterSignOutUrl={'/login'}
+		signInForceRedirectUrl={'/'}
+		signUpFallbackRedirectUrl={'/'}
+		publishableKey={VITE_CLERK_PUBLISHABLE_KEY}
+	>
 		<StrictMode>
 			<App />
 		</StrictMode>
