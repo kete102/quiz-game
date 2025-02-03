@@ -29,7 +29,7 @@ function Difficultypicker() {
 
 	return (
 		<section className='w-full p-2'>
-			<h2 className='text-2xl font-semibold opacity-80 md:text-3xl'>
+			<h2 className='text-2xl font-semibold text-white opacity-80 md:text-3xl'>
 				Difficulty
 			</h2>
 			<p className='text-lg text-zinc-400'>
@@ -42,7 +42,7 @@ function Difficultypicker() {
 						key={difficulty.id}
 						onClick={(e) => handleAddDifficulties(e)}
 						className={clsx(
-							`inline-flex transform cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] font-medium transition-all duration-200 active:scale-95`,
+							`inline-flex transform cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] font-medium text-white transition-all duration-200 active:scale-95`,
 							{
 								'selected-easy-difficulty':
 									storeDifficulty === difficulty.apiValue &&

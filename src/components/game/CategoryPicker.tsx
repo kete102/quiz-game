@@ -10,7 +10,7 @@ function CategoryPicker() {
 
 	return (
 		<section className='w-full p-2'>
-			<h2 className='text-2xl font-semibold opacity-80 md:text-3xl'>
+			<h2 className='text-2xl font-semibold text-white opacity-80 md:text-3xl'>
 				Categories
 			</h2>
 			<p className='text-lg text-zinc-400'>
@@ -23,7 +23,7 @@ function CategoryPicker() {
 						onClick={handleAddCategory}
 						key={category.id}
 						className={clsx(
-							'tranform inline-flex cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] font-medium transition-all duration-200 focus:scale-103 active:scale-95',
+							'tranform inline-flex cursor-pointer items-center gap-x-2 rounded-md border-2 border-white/50 p-2 text-[1rem] font-medium text-white transition-all duration-200 focus:scale-103 active:scale-95',
 							{
 								'selected-category': categories.includes(category.apiValue),
 							}
