@@ -7,7 +7,7 @@ import { LogOut } from 'lucide-react'
 import { useNavigate } from '@tanstack/react-router'
 
 function Game() {
-	const [timer, setTimer] = useState<number>(300)
+	const [timer, setTimer] = useState<number>(600)
 	const {
 		correctAnswers,
 		incorrectAnswers,
@@ -63,13 +63,13 @@ function Game() {
 					/>
 					{/* Progreso y Resultados */}
 				</div>
+				<button
+					className='my-6 inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-md border-none bg-red-800/50 px-4 py-3 text-xl font-semibold tracking-wide text-red-300 transition-all duration-200 select-none hover:scale-102 hover:border-white hover:shadow-xl active:scale-95 md:text-2xl'
+					onClick={handleQuitGame}
+				>
+					Quit game <LogOut className='size-6' />
+				</button>
 			</div>
-			<button
-				className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-md border-none bg-red-800/50 px-4 py-3 text-xl font-semibold tracking-wide text-red-300 transition-all duration-200 select-none hover:scale-102 hover:border-white hover:shadow-xl active:scale-95 md:text-2xl'
-				onClick={handleQuitGame}
-			>
-				Quit game <LogOut className='size-6' />
-			</button>
 		</div>
 	)
 }
