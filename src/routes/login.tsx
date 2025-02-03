@@ -1,7 +1,7 @@
 import { SignedIn, useAuth } from '@clerk/clerk-react'
 import { createFileRoute, Navigate } from '@tanstack/react-router'
-import Hero from '@/components/login/Hero'
-import Login from '@/components/login/Login'
+import Hero from '@/components/auth/Hero'
+import Login from '@/components/auth/Login'
 import Github from '@/components/icons/Github'
 
 export const Route = createFileRoute('/login')({
