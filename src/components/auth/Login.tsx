@@ -1,5 +1,5 @@
 import { SignedOut, SignInButton } from '@clerk/clerk-react'
-import { Link, useNavigate } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 
 function Login() {
 	const navigate = useNavigate()
