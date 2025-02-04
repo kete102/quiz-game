@@ -6,11 +6,15 @@ import {
 } from '@clerk/clerk-react'
 import { ArrowRight } from 'lucide-react'
 import logo from '@/assets/logo-mind-rush.webp'
+import { Link } from '@tanstack/react-router'
 
 function Header() {
 	return (
 		<header className='mx-auto mt-2 flex min-h-15 w-full items-center justify-between rounded-lg bg-white/5 p-4 px-4 shadow-2xl select-none md:px-4 lg:max-w-6xl'>
-			<section className='flex items-center gap-x-2'>
+			<Link
+				to={'/'}
+				className='inline-flex items-center gap-x-2'
+			>
 				<img
 					src={logo}
 					width={50}
@@ -19,7 +23,7 @@ function Header() {
 				<h1 className='text-2xl font-bold tracking-wide text-white'>
 					MindRush
 				</h1>
-			</section>
+			</Link>
 			<SignedIn>
 				<UserButton
 					appearance={{
