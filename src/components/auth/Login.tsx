@@ -1,13 +1,13 @@
-import { useGameStore } from '@/store/game/store'
 import { SignedOut, SignInButton } from '@clerk/clerk-react'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 
 function Login() {
-	const { setIsGameActive } = useGameStore()
+	const navigate = useNavigate()
 
 	const handleStartGuestGame = () => {
-		setIsGameActive(true)
+		navigate({ to: '/game-setup' })
 	}
+
 	return (
 		<section className='mt-10 w-full max-w-md space-y-8 rounded-lg bg-black/30 p-8 text-center shadow-xl md:px-8 md:py-10'>
 			<p className='text-2xl font-semibold text-white'>
@@ -35,7 +35,7 @@ function Login() {
 				onClick={handleStartGuestGame}
 				className='w-full cursor-pointer rounded-lg bg-gray-700 px-6 py-3 text-lg text-gray-300 shadow-lg transition-all hover:scale-105 hover:bg-gray-600'
 			>
-				<Link to='/game-setup'>Play as Guest</Link>
+				Play as Guest
 			</button>
 		</section>
 	)
