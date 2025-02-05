@@ -35,7 +35,7 @@ function CountdownTimer({ padding = 3, duration = 0.5 }: Props) {
 
 	return (
 		<AnimatePresence mode='popLayout'>
-			<section className='flex w-full items-center justify-center gap-1 md:justify-start'>
+			<section className='flex w-fit items-center justify-center rounded-md bg-white/5 p-3 font-medium md:justify-start'>
 				<Timer className='mx-2 size-10 stroke-white/50' />
 				{displayValues.map((number, index) => (
 					<motion.span
@@ -49,7 +49,7 @@ function CountdownTimer({ padding = 3, duration = 0.5 }: Props) {
 							duration: duration,
 						}}
 						className={clsx(
-							'inline-block rounded-md font-sans text-4xl font-bold tabular-nums transition-all md:text-5xl',
+							'inline-block text-3xl tabular-nums transition-all',
 							{ 'text-green-600/60': timer >= 150 },
 							{ 'text-orange-600/60': timer >= 50 && timer <= 149 },
 							{ 'text-red-600/60': timer >= 11 && timer <= 49 },
