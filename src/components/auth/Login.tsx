@@ -17,7 +17,7 @@ function Login() {
 			{/* Sign In Button */}
 			<SignedOut>
 				<SignInButton mode='modal'>
-					<button className='w-full cursor-pointer rounded-lg bg-gradient-to-r from-violet-500 to-violet-900 px-6 py-3 text-lg text-white shadow-lg transition-all hover:scale-105 hover:shadow-2xl'>
+					<button className='w-full cursor-pointer rounded-lg bg-gradient-to-r from-violet-500 to-violet-900 px-6 py-3 text-lg text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-98 active:shadow-2xl'>
 						Sign In
 					</button>
 				</SignInButton>
@@ -33,7 +33,7 @@ function Login() {
 			{/* Play as Guest */}
 			<button
 				onClick={handleStartGuestGame}
-				className='w-full cursor-pointer rounded-lg bg-gray-700 px-6 py-3 text-lg text-gray-300 shadow-lg transition-all hover:scale-105 hover:bg-gray-600'
+				className='w-full cursor-pointer rounded-lg bg-gray-700 px-6 py-3 text-lg text-gray-300 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gray-600 hover:shadow-2xl active:scale-98 active:shadow-2xl'
 			>
 				Play as Guest
 			</button>
