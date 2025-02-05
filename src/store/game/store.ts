@@ -17,12 +17,20 @@ interface State {
 	userAnswers: { questionId: string; isCorrect: boolean }[]
 	currentQuestionIndex: number
 	isGameActive: boolean
+	score: number
 }
 
 interface Actions {
 	startGame: (questions: Question[]) => void
-	selectAnswer: (questionId: string, isCorrect: boolean) => void
+	selectAnswer: ({
+		questionId,
+		isCorrect,
+	}: {
+		questionId: string
+		isCorrect: boolean
+	}) => void
 	nextQuestion: () => void
+	addPoints: () => void
 	endGame: () => void
 	resetGame: () => void
 }
@@ -32,13 +40,13 @@ const initialState: State = {
 	userAnswers: [],
 	currentQuestionIndex: 0,
 	isGameActive: false,
+	score: 0,
 }
 
 export const useGameStore = create<State & Actions>((set) => ({
 	...initialState,
 
 	startGame: (newQuestions: Question[]) => {
-		console.log('State: ', newQuestions)
 		set({
 			questions: newQuestions,
 			currentQuestionIndex: 0,
@@ -47,12 +55,25 @@ export const useGameStore = create<State & Actions>((set) => ({
 		})
 	},
 	endGame: () => set({ isGameActive: false }),
+	addPoints: () =>
+		set((state) => ({
+			score: state.score + 10,
+		})),
 	nextQuestion: () =>
 		set((state) => ({
 			currentQuestionIndex: state.currentQuestionIndex + 1,
 		})),
-	selectAnswer: (answers) =>
-		set((state) => ({ ...state, selectedAnswers: answers })),
+	selectAnswer: ({
+		questionId,
+		isCorrect,
+	}: {
+		questionId: string
+		isCorrect: boolean
+	}) =>
+		set((state) => ({
+			...state,
+			selectedAnswers: [...state.userAnswers, { questionId, isCorrect }],
+		})),
 	resetGame: () =>
 		set({
 			questions: [],
