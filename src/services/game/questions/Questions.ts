@@ -21,7 +21,6 @@ export async function FetchQuestions({
 	difficulty,
 }: Props): Promise<Question[] | null> {
 	try {
-		console.log({ categories, difficulty })
 		if (!categories) throw new Error('Required Categories missing')
 		if (!difficulty) throw new Error('Required difficulty missing')
 
