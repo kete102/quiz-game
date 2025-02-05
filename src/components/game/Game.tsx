@@ -21,7 +21,7 @@ function Game({ questions }: { questions: Question[] }) {
 	} = useGame()
 
 	return (
-		<div className='flex h-screen w-full flex-col items-center justify-start gap-y-10'>
+		<div className='flex h-full w-full flex-col items-center justify-start gap-y-10'>
 			<div className='mt-10 h-full w-full flex-1 flex-col justify-between rounded-lg bg-white/5 p-6 shadow-md shadow-gray-500/50 md:mt-2 md:max-w-2xl md:p-10 lg:max-w-3xl'>
 				{isGameActive && questions.length > 0 ? (
 					<React.Fragment>
@@ -32,7 +32,7 @@ function Game({ questions }: { questions: Question[] }) {
 						</section>
 						<div className='my-3 h-[2.5px] w-full rounded-full bg-zinc-100/30 md:my-5'></div>
 
-						<section className='mt-3 flex w-full flex-col items-start gap-y-4 px-2'>
+						<section className='my-6 flex w-full flex-col items-start gap-y-4 px-2'>
 							{shuffledAnswers.map((answer, index) => (
 								<AnswerButton
 									answer={answer}
@@ -46,20 +46,20 @@ function Game({ questions }: { questions: Question[] }) {
 							))}
 						</section>
 
-						<div className='mt-10 flex w-full flex-col items-center justify-center gap-y-6 px-2 md:flex-row'>
+						<div className='my-8 flex w-full flex-col items-center justify-center gap-y-6 px-2 md:flex-row'>
 							<GameInfo currentQuestionIndex={currentQuestionIndex} />
 							{/* Progreso y Resultados */}
 						</div>
-						<div className='my-4 flex md:flex-col md:gap-y-2'>
+						<div className='my-4 flex flex-col gap-y-3'>
 							<button
 								disabled={!answerSelected}
-								className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-md border-none bg-blue-800/80 px-4 py-3 text-xl font-semibold tracking-wide text-blue-300 transition-all duration-200 select-none hover:scale-102 hover:border-white hover:shadow-xl active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 md:text-2xl'
+								className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-md border-none bg-blue-800/80 px-4 py-3 text-xl font-semibold tracking-wide text-blue-200 transition-all duration-200 select-none hover:scale-102 hover:border-white hover:shadow-xl active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 md:text-2xl'
 								onClick={handleNextQuestion}
 							>
 								Next
 							</button>
 							<button
-								className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-md border-none bg-red-800/80 px-4 py-3 text-xl font-semibold tracking-wide text-red-300 transition-all duration-200 select-none hover:scale-102 hover:border-white hover:shadow-xl active:scale-95 md:text-2xl'
+								className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-md border-none bg-red-800/80 px-4 py-3 text-xl font-semibold tracking-wide text-red-200 transition-all duration-200 select-none hover:scale-102 hover:border-white hover:shadow-xl active:scale-95 md:text-2xl'
 								onClick={handleQuitGame}
 							>
 								Quit game <LogOut className='size-6' />
