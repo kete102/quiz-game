@@ -1,10 +1,8 @@
 import { ArrowRight } from 'lucide-react'
 import PlayerStats from './game/PlayerStats'
-import { useUser } from '@clerk/clerk-react'
 import { useNavigate } from '@tanstack/react-router'
 
 function Overview() {
-	const { user } = useUser()
 	const navigate = useNavigate()
 
 	const handleStartGame = () => navigate({ to: '/game-setup' })
@@ -12,9 +10,6 @@ function Overview() {
 	return (
 		<div className='h-full w-full space-y-2 select-none'>
 			<section className='flex w-full flex-col items-center gap-y-2 md:flex-row md:justify-between'>
-				<h1 className='inline-flex items-center gap-x-2 text-3xl tracking-wider text-white opacity-80 md:text-4xl'>
-					Hi, <span>{user?.firstName}👋</span>
-				</h1>
 				<button
 					className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-lg border-none bg-black/10 px-4 py-3 text-2xl font-medium tracking-normal text-white shadow-md transition-all duration-200 hover:scale-103 hover:shadow-2xl active:scale-97 active:shadow-2xl md:w-fit'
 					onClick={handleStartGame}
