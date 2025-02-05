@@ -79,5 +79,6 @@ export const useGameStore = create<State & Actions>((set) => ({
 			questions: [],
 			currentQuestionIndex: 0,
 			userAnswers: [],
+			score: 0,
 		}),
 }))
