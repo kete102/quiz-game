@@ -31,7 +31,6 @@ export function GameStats() {
 				wrongAnswers: data.wrong_answers,
 				streak: data.streak,
 				bestStreak: data.best_streak,
-				categoriesPlayed: data.categories_played,
 				lastPlayed: data.last_played_at,
 			}
 
@@ -68,7 +67,6 @@ export function GameStats() {
 					best_streak: newStats.bestStreak,
 					total_games: newStats.totalGames,
 					streak: newStats.streak,
-					categories_played: newStats.categoriesPlayed,
 					correct_answers: newStats.correctAnswers,
 					wrong_answers: newStats.wrongAnswers,
 					win_ratio:
@@ -95,7 +93,6 @@ export function GameStats() {
 				wrongAnswers: data.wrong_answers,
 				streak: data.streak,
 				bestStreak: data.best_streak,
-				categoriesPlayed: data.categories_played,
 				lastPlayed: data.last_played_at,
 			}
 

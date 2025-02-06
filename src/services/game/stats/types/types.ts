@@ -4,7 +4,6 @@ export interface UserStats {
 	userId: string
 	correctAnswers: number
 	wrongAnswers: number
-	categoriesPlayed: string[]
 	winRatio: number
 	streak: number
 	bestStreak: number
