@@ -42,7 +42,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          friend_id?: string
+          friend_id: string
           id?: string
           status?: Database["public"]["Enums"]["friend_status"] | null
           user_id?: string
@@ -59,14 +59,14 @@ export type Database = {
             columns: ["friend_id"]
             isOneToOne: false
             referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedColumns: ["clerk_id"]
           },
           {
             foreignKeyName: "user_friends_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedColumns: ["clerk_id"]
           },
         ]
       }
@@ -110,7 +110,7 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: true
             referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedColumns: ["clerk_id"]
           },
         ]
       }
@@ -118,21 +118,18 @@ export type Database = {
         Row: {
           clerk_id: string
           created_at: string
-          id: string
           user_email: string
           user_name: string
         }
         Insert: {
           clerk_id?: string
           created_at?: string
-          id?: string
           user_email?: string
           user_name?: string
         }
         Update: {
           clerk_id?: string
           created_at?: string
-          id?: string
           user_email?: string
           user_name?: string
         }

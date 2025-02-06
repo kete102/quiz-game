@@ -1,5 +1,26 @@
 import { createClient } from '@supabase/supabase-js'
-import { SUPABASE_ANON_KEY, SUPABASE_URL } from '@/utils/config'
 import { Database } from './services/game/stats/types/supabase'
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './utils/config'
+import { ActiveSessionResource } from '@clerk/types'
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY)
+export function CreateSupabaseClerkClient(
+	session: ActiveSessionResource | null | undefined
+) {
+	return createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
+		global: {
+			fetch: async (url, options = {}) => {
+				const clerkToken = await session?.getToken({
+					template: 'supabase',
+				})
+
+				const headers = new Headers(options?.headers)
+				headers.set('Authorization', `Bearer ${clerkToken}`)
+
+				return fetch(url, {
+					...options,
+					headers,
+				})
+			},
+		},
+	})
+}

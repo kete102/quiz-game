@@ -1,7 +1,6 @@
 import { Database } from './supabase'
 
 export interface UserStats {
-	userId: string
 	correctAnswers: number
 	wrongAnswers: number
 	winRatio: number

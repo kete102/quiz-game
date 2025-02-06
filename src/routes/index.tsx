@@ -3,8 +3,18 @@ import Header from '@/components/Header'
 import Overview from '@/components/Overview'
 import Footer from '@/components/Footer'
 import { SignedOut } from '@clerk/clerk-react'
+import GameStatsService from '@/services/game/stats/GameStats'
 
 export const Route = createFileRoute('/')({
+	beforeLoad: async ({ context }) => {
+		if (!context.supabaseClerkClient)
+			throw new Error('Client not authenticated')
+
+		const response = await GameStatsService({
+			supabaseClerkClient: context.supabaseClerkClient,
+		}).getUserStats()
+		console.log('User Stats: ', response)
+	},
 	component: RouteComponent,
 })
 

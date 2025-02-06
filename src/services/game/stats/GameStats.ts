@@ -1,19 +1,18 @@
-import { supabase } from '@/db'
+import { Database } from './types/supabase'
 import { ApiResponse, DBUserStats, UserStats } from './types/types'
-import { PostgrestError } from '@supabase/supabase-js'
+import { createClient, PostgrestError } from '@supabase/supabase-js'
 
-export function GameStats() {
-	const getUserStats = async ({
-		userId,
-	}: {
-		userId: string
-	}): Promise<ApiResponse<UserStats>> => {
+function GameStatsService({
+	supabaseClerkClient,
+}: {
+	supabaseClerkClient: ReturnType<typeof createClient<Database>>
+}) {
+	const getUserStats = async (): Promise<ApiResponse<UserStats>> => {
 		try {
-			const { data, error } = await supabase
+			const { data, error } = await supabaseClerkClient
 				.from('user_stats')
-				.select('')
-				.eq('user_id', userId)
-				.single<DBUserStats>()
+				.select()
+				.single()
 
 			if (error) {
 				return {
@@ -24,7 +23,6 @@ export function GameStats() {
 			}
 
 			const transformedData: UserStats = {
-				userId: data.user_id,
 				totalGames: data.total_games,
 				winRatio: data.win_ratio,
 				correctAnswers: data.correct_answers,
@@ -61,7 +59,7 @@ export function GameStats() {
 		newStats: UserStats
 	}): Promise<ApiResponse<UserStats>> => {
 		try {
-			const { data, error } = await supabase
+			const { data, error } = await supabaseClerkClient
 				.from('user_stats')
 				.update({
 					best_streak: newStats.bestStreak,
@@ -74,7 +72,6 @@ export function GameStats() {
 						(newStats.correctAnswers + newStats.wrongAnswers),
 					last_played_at: newStats.lastPlayed,
 				})
-				.eq('user_id', newStats.userId)
 				.single<DBUserStats>()
 
 			if (error) {
@@ -86,7 +83,6 @@ export function GameStats() {
 			}
 
 			const transformedData: UserStats = {
-				userId: data.user_id,
 				totalGames: data.total_games,
 				winRatio: data.win_ratio,
 				correctAnswers: data.correct_answers,
@@ -122,3 +118,5 @@ export function GameStats() {
 		updateUserStats,
 	}
 }
+
+export default GameStatsService

@@ -1,4 +1,4 @@
-import { useGameStore } from '@/store/game/store'
+import { useGameStore } from '@/store/game/gameStore'
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
