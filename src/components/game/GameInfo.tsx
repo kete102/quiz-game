@@ -1,4 +1,4 @@
-import { useGameStore } from '@/store/game/store'
+import { useGameStore } from '@/store/game/gameStore'
 import { ListOrdered, Trophy } from 'lucide-react'
 
 interface Props {
