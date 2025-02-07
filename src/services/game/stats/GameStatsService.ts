@@ -82,7 +82,7 @@ function GameStatsService({
 						streak: streak,
 						correct_answers: correctAnswers,
 						wrong_answers: wrongAnswers,
-						win_ratio: correctAnswers / (correctAnswers + wrongAnswers),
+						win_ratio: (correctAnswers / (correctAnswers + wrongAnswers)) * 100,
 						last_played_at: new Date().toISOString(),
 					},
 					{
