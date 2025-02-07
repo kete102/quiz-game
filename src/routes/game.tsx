@@ -6,7 +6,7 @@ import {
 	CategoriesApiValueSchema,
 	DifficultiesApiValueSchema,
 } from '@/services/game/questions/types'
-import { useGameStore } from '@/store/game/store'
+import { useGameStore } from '@/store/game/gameStore'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect } from 'react'
 
