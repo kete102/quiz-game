@@ -9,13 +9,12 @@ export interface UserStats {
 	lastPlayed: string
 	totalGames: number
 }
-
 export type DBUserStats = Database['public']['Tables']['user_stats']['Row']
 
 interface SuccessResponse<T> {
 	success: true
 	message: string
-	data: T
+	data: T | null
 }
 
 interface ErrorResponse {
