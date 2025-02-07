@@ -33,3 +33,14 @@ export const DIFFICULTIES: Difficulty[] = [
 	{ id: 1, name: 'Medium', icon: '😐', apiValue: 'medium' },
 	{ id: 2, name: 'Hard', icon: '😣', apiValue: 'hard' },
 ]
+
+export const MESSAGES = [
+	{ min: 0, max: 39, text: '😢 Keep going! You can do better, try again.' },
+	{ min: 40, max: 69, text: '😊 Well played! But you can still improve.' },
+	{ min: 70, max: 99, text: '🔥 Amazing! Almost perfect, keep it up!' },
+	{
+		min: 1,
+		max: 1,
+		text: "🎉 Incredible! You got the highest score, you're a pro!",
+	},
+]

@@ -1,32 +1,18 @@
-import { useGameStore } from '@/store/game/store'
+import { useGameStore } from '@/store/game/gameStore'
+import { MESSAGES } from '@/utils/constants'
 import { SignedIn } from '@clerk/clerk-react'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight, RotateCcw } from 'lucide-react'
 
-const messages = [
-	{ min: 0, max: 39, text: '😢 Keep going! You can do better, try again.' },
-	{ min: 40, max: 69, text: '😊 Well played! But you can still improve.' },
-	{ min: 70, max: 99, text: '🔥 Amazing! Almost perfect, keep it up!' },
-	{
-		min: 1,
-		max: 1,
-		text: "🎉 Incredible! You got the highest score, you're a pro!",
-	},
-]
-
 const getMessage = (score: number, total: number) => {
 	const ratio = score / total
 	return (
-		messages.find(({ min, max }) => ratio >= min && ratio <= max)?.text ||
+		MESSAGES.find(({ min, max }) => ratio >= min && ratio <= max)?.text ||
 		'⚠️ Error en la puntuación.'
 	)
 }
 
-interface Props {
-	handlePlayAgain: () => void
-}
-
-export const FinishedGame = ({ handlePlayAgain }: Props) => {
+export const FinishedGame = () => {
 	const { questions, score } = useGameStore()
 
 	return (
@@ -40,17 +26,17 @@ export const FinishedGame = ({ handlePlayAgain }: Props) => {
 				</p>
 			</div>
 			<div className='flex w-full max-w-lg flex-col gap-y-4'>
-				<button
+				<Link
+					to='/game-setup'
 					className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-md border-none bg-blue-800/80 px-4 py-3 text-xl font-semibold tracking-wide text-blue-300 transition-all duration-200 select-none hover:scale-102 hover:border-white hover:shadow-xl active:scale-95 md:text-2xl'
-					onClick={handlePlayAgain}
 				>
-					Play again <RotateCcw className='size-6' />
-				</button>
+					Play again
+					<RotateCcw className='size-6' />
+				</Link>
 				<SignedIn>
 					<Link
 						to='/'
 						className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-md border-none bg-white/5 px-4 py-3 text-xl font-medium tracking-wide text-white transition-all duration-200 select-none hover:scale-102 hover:shadow-xl active:scale-95 md:text-2xl'
-						onClick={handlePlayAgain}
 					>
 						Go home <ArrowRight className='size-6' />
 					</Link>
