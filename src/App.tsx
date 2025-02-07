@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 import { createClient } from '@supabase/supabase-js'
@@ -23,6 +24,8 @@ const router = createRouter({
 	},
 })
 
+const queryClient = new QueryClient()
+
 function App() {
 	const { session } = useSession()
 	const supabaseClerkClient = useMemo(() => {
@@ -30,10 +33,12 @@ function App() {
 	}, [session])
 
 	return (
-		<RouterProvider
-			router={router}
-			context={{ supabaseClerkClient }}
-		/>
+		<QueryClientProvider client={queryClient}>
+			<RouterProvider
+				router={router}
+				context={{ supabaseClerkClient }}
+			/>
+		</QueryClientProvider>
 	)
 }
 
