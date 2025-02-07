@@ -1,13 +1,8 @@
 import { mapDataFromDb } from './helpers/MapDataFromDB'
-import { Database } from './types/supabase'
 import { ApiResponse, UserStats } from './types/types'
-import { createClient, PostgrestError } from '@supabase/supabase-js'
+import { PostgrestError, SupabaseClient } from '@supabase/supabase-js'
 
-function GameStatsService({
-	supabaseClerkClient,
-}: {
-	supabaseClerkClient: ReturnType<typeof createClient<Database>>
-}) {
+function GameStatsService(supabaseClerkClient: SupabaseClient) {
 	// Función para manejar los errores
 	const handleError = (error: unknown): ApiResponse<UserStats> => {
 		if (error instanceof PostgrestError) {
