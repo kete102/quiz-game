@@ -1,14 +1,8 @@
 import * as React from 'react'
-import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
 import NotFound from '@/components/NotFound'
-import { createClient } from '@supabase/supabase-js'
-import { Database } from '@/services/game/stats/types/supabase'
 
-interface Context {
-	supabaseClerkClient: ReturnType<typeof createClient<Database>>
-}
-
-export const Route = createRootRouteWithContext<Context>()({
+export const Route = createRootRoute({
 	component: RootComponent,
 	notFoundComponent: NotFound,
 })
