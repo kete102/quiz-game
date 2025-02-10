@@ -1,111 +1,98 @@
-import { mapDataFromDb } from './helpers/MapDataFromDB'
-import { ApiResponse, UserStats } from './types/types'
+import { DBUserStats, UserStats } from '@/models/Stats/types'
+import { createAdaptedStats } from './adapters/createAdaptedStats'
+
 import { PostgrestError, SupabaseClient } from '@supabase/supabase-js'
+import { calculateWinRatio } from '@/hooks/game/helpers/calculateWinRation'
 
-function GameStatsService(supabaseClerkClient: SupabaseClient) {
-	// Función para manejar los errores
-	const handleError = (error: unknown): ApiResponse<UserStats> => {
-		if (error instanceof PostgrestError) {
+/**
+ * @param error
+ * @return Throws an error
+ */
+const handleError = (error: unknown): never => {
+	throw new Error(
+		error instanceof PostgrestError
+			? `DB error: ${error.message}`
+			: `Unexpected error: ${(error as Error).message || 'Unknown error'}`
+	)
+}
+export const GetUserStats = async (
+	supabaseClerkClient: SupabaseClient
+): Promise<UserStats> => {
+	try {
+		const { data, error } = await supabaseClerkClient
+			.from('user_stats')
+			.select()
+			.single<DBUserStats>()
+
+		if (error?.code === 'PGRST116')
 			return {
-				success: false,
-				message:
-					error instanceof PostgrestError ? 'DB error' : 'Unexpedted error',
-				error: error.message,
-			}
-		}
-		return {
-			success: false,
-			message: 'Unexpected error occurred',
-			error: (error as Error).message,
-		}
-	}
-
-	const getUserStats = async (): Promise<ApiResponse<UserStats>> => {
-		try {
-			const { data, error } = await supabaseClerkClient
-				.from('user_stats')
-				.select()
-				.maybeSingle()
-
-			if (error) {
-				return handleError(error)
+				bestStreak: 0,
+				correctAnswers: 0,
+				lastPlayed: new Date().toLocaleDateString(),
+				streak: 0,
+				totalGames: 0,
+				winRatio: 0,
+				wrongAnswers: 0,
 			}
 
-			if (!data) {
-				return {
-					success: true,
-					message: 'No stats found for user',
-					data: null,
-				}
-			}
-
-			const transformedData = mapDataFromDb(data)
-
+		if (!data) {
 			return {
-				success: true,
-				message: 'User stats fetched successfully',
-				data: transformedData,
+				bestStreak: 0,
+				correctAnswers: 0,
+				lastPlayed: new Date().toLocaleDateString(),
+				streak: 0,
+				totalGames: 0,
+				winRatio: 0,
+				wrongAnswers: 0,
 			}
-		} catch (error) {
-			return handleError(error)
 		}
-	}
 
-	const updateUserStats = async ({
-		bestStreak,
-		totalGames,
-		streak,
-		correctAnswers,
-		wrongAnswers,
-		userId,
-	}: {
-		bestStreak: number
-		totalGames: number
-		streak: number
-		correctAnswers: number
-		wrongAnswers: number
-		userId: string
-	}): Promise<ApiResponse<UserStats>> => {
-		try {
-			const { data, error } = await supabaseClerkClient
-				.from('user_stats')
-				.upsert(
-					{
-						user_id: userId,
-						best_streak: bestStreak,
-						total_games: totalGames,
-						streak: streak,
-						correct_answers: correctAnswers,
-						wrong_answers: wrongAnswers,
-						win_ratio: (correctAnswers / (correctAnswers + wrongAnswers)) * 100,
-						last_played_at: new Date().toISOString(),
-					},
-					{
-						onConflict: 'user_id',
-					}
-				)
-				.single()
-
-			if (error) {
-				return handleError(error)
-			}
-
-			const mappedData = mapDataFromDb(data)
-
-			return {
-				success: true,
-				message: 'User stats updated successfully',
-				data: mappedData,
-			}
-		} catch (error) {
-			return handleError(error)
-		}
-	}
-
-	return {
-		getUserStats,
-		updateUserStats,
+		return createAdaptedStats(data)
+	} catch (error) {
+		return handleError(error)
 	}
 }
 
-export default GameStatsService
+export const UpdateUserStats = async ({
+	supabaseClerkClient,
+	newStats,
+}: {
+	supabaseClerkClient: SupabaseClient
+	newStats: {
+		streak: number
+		bestStreak: number
+		totalGames: number
+		correctAnswers: number
+		wrongAnswers: number
+		userId: string
+	}
+}): Promise<UserStats> => {
+	try {
+		const { data, error } = await supabaseClerkClient
+			.from('user_stats')
+			.upsert(
+				{
+					user_id: newStats.userId,
+					best_streak: newStats.bestStreak,
+					total_games: newStats.totalGames,
+					streak: newStats.streak,
+					correct_answers: newStats.correctAnswers,
+					wrong_answers: newStats.wrongAnswers,
+					win_ratio: calculateWinRatio({
+						correctAnswers: newStats.correctAnswers,
+						totalGames: newStats.totalGames,
+					}),
+					last_played_at: new Date().toISOString(),
+				},
+				{ onConflict: 'user_id' }
+			)
+			.single<DBUserStats>()
+
+		if (error) return handleError(error)
+		if (!data) return handleError(new Error('Error updating user stats'))
+
+		return createAdaptedStats(data)
+	} catch (error) {
+		return handleError(error)
+	}
+}

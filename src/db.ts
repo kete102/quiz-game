@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { Database } from './services/game/stats/types/supabase'
+import { Database } from './models/DB/supabase.types'
 import { SUPABASE_URL, SUPABASE_KEY } from './utils/config'
 import { ActiveSessionResource } from '@clerk/types'
 

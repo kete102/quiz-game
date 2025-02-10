@@ -1,67 +1,64 @@
 import { CreateSupabaseClerkClient } from '@/db'
-import GameStatsService from '@/services/game/stats/GameStatsService'
+import { UserStats } from '@/models/Stats/types'
+import {
+	GetUserStats,
+	UpdateUserStats,
+} from '@/services/game/stats/GameStatsService'
 import { useSession } from '@clerk/clerk-react'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
 export function useUserStats() {
 	const { session } = useSession()
+	const queryClient = useQueryClient()
+
 	const supabaseClerkClient = useMemo(() => {
 		if (!session) return null
 		return CreateSupabaseClerkClient(session)
 	}, [session])
 
-	const {
-		data: userStats,
-		isLoading,
-		error,
-		refetch,
-	} = useQuery({
+	// Fetch User Stats
+	const { data, isLoading, error } = useQuery({
 		queryKey: ['user-stats', session?.user.id],
 		queryFn: async () => {
-			if (!supabaseClerkClient) return
-			const response =
-				await GameStatsService(supabaseClerkClient).getUserStats()
-
-			if (!response.success) throw new Error(response.error)
-
-			return response.data
+			if (!supabaseClerkClient) throw new Error('No Supabase Client found')
+			return await GetUserStats(supabaseClerkClient)
 		},
-		enabled: !!session, // Only fetches de stats if session exists
-		staleTime: 5 * 60 * 1000, // 5 mins in cache
+		enabled: !!session,
+		staleTime: 5 * 60 * 1000, // 5 mins cache
 	})
-	const updateUserStats = async () => {
-		if (!session || !supabaseClerkClient) return
-		try {
-			const response = await GameStatsService(
-				supabaseClerkClient
-			).updateUserStats({
-				bestStreak: 3,
-				correctAnswers: 9,
-				streak: 3,
-				totalGames: 3,
-				wrongAnswers: 1,
-				userId: session.user.id,
+
+	// Update User Stats Mutation
+	const { mutate: updateUserStats, isPending: isUpdating } = useMutation({
+		mutationFn: async (newStats: {
+			streak: number
+			bestStreak: number
+			totalGames: number
+			correctAnswers: number
+			wrongAnswers: number
+			userId: string
+		}) => {
+			if (!supabaseClerkClient) throw new Error('No Supabase Client found')
+			return await UpdateUserStats({
+				supabaseClerkClient,
+				newStats,
 			})
-
-			if (!response.success) {
-				throw new Error(response.error)
-			}
-
-			if (response.success) {
-				console.log('User stats updated: ', response.data)
-				refetch() // Refetches de user stats is the update is succesfull
-			}
-
-			return response.data
-		} catch (error) {
-			console.error(error)
-		}
-	}
+		},
+		onSuccess: (updatedStats) => {
+			queryClient.setQueryData(
+				['user-stats', session?.user.id],
+				(prevStats: UserStats) => ({
+					...prevStats,
+					...updatedStats, // <-- Actualizamos el cache sin necesidad de hacer refetch
+				})
+			)
+		},
+	})
 
 	return {
-		userStats,
+		userStats: data,
 		isLoading,
+		isUpdating,
 		error,
 		updateUserStats,
 	}

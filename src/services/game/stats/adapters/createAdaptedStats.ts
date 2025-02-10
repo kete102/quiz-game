@@ -1,4 +1,4 @@
-import { DBUserStats, UserStats } from '../types/types'
+import { DBUserStats, UserStats } from '@/models/Stats/types'
 
 export const createAdaptedStats = (data: DBUserStats): UserStats => {
 	const formatedStats: UserStats = {

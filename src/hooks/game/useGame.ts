@@ -1,4 +1,4 @@
-import { useGameStore } from '@/store/game/gameStore'
+import { useGameStore } from '@/store/game/useGameStore'
 import { useSession } from '@clerk/clerk-react'
 import { useEffect, useState } from 'react'
 import { useUserStats } from './useUserStats'
@@ -18,6 +18,7 @@ export function useGame() {
 		addPoints,
 	} = useGameStore()
 	const { updateUserStats } = useUserStats()
+	const { userStats } = useUserStats()
 	const currentQuestion = questions[currentQuestionIndex]
 
 	// Shuffle answers only when the quesiton changes
@@ -59,10 +60,17 @@ export function useGame() {
 
 		//If the user is signed in, updates de user stats
 		try {
-			updateUserStats()
+			updateUserStats({
+				bestStreak: (userStats?.bestStreak ?? 0) + 1,
+				correctAnswers: (userStats?.correctAnswers ?? 0) + 1,
+				streak: (userStats?.streak ?? 0) + 1,
+				totalGames: (userStats?.totalGames ?? 0) + 1,
+				wrongAnswers: (userStats?.wrongAnswers ?? 0) + 1,
+				userId: session.user.id,
+			})
 			endGame()
 		} catch (error) {
-			console.log('Error updating user stats: ', error)
+			console.error('Error updating  user stats: ', error)
 		}
 	}
 
