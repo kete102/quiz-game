@@ -1,4 +1,4 @@
-import { useGameStore } from '@/store/game/gameStore'
+import { useGameStore } from '@/store/game/useGameStore'
 import { MESSAGES } from '@/utils/constants'
 import { SignedIn } from '@clerk/clerk-react'
 import { Link } from '@tanstack/react-router'

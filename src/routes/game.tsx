@@ -5,8 +5,8 @@ import { FetchQuestions } from '@/services/game/questions/Questions'
 import {
 	CategoriesApiValueSchema,
 	DifficultiesApiValueSchema,
-} from '@/services/game/questions/types'
-import { useGameStore } from '@/store/game/gameStore'
+} from '@/models/Question/types'
+import { useGameStore } from '@/store/game/useGameStore'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect } from 'react'
 

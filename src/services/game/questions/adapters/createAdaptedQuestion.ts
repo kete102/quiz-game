@@ -1,5 +1,4 @@
-import { Question } from '@/store/game/gameStore'
-import { APIQuestion } from '../types'
+import { APIQuestion, Question } from '@/models/Question/types'
 
 export const createAdapatedQuestion = (questions: APIQuestion[]) => {
 	const formatedQuestion: Question[] = questions.map(
@@ -14,4 +13,3 @@ export const createAdapatedQuestion = (questions: APIQuestion[]) => {
 	)
 	return formatedQuestion
 }
-

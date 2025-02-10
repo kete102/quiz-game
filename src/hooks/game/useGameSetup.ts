@@ -2,7 +2,7 @@ import {
 	CategoriesApiValueSchema,
 	DifficultiesApiValueSchema,
 	DifficultiesApiValue,
-} from '@/services/game/questions/types'
+} from '@/models/Question/types'
 import { useState } from 'react'
 
 export function useGameSetup() {

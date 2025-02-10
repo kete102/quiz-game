@@ -4,7 +4,7 @@ import { LogOut } from 'lucide-react'
 import { FinishedGame } from './FinishedGame'
 import { useGame } from '@/hooks/game/useGame'
 import React from 'react'
-import { Question, useGameStore } from '@/store/game/gameStore'
+import { Question, useGameStore } from '@/store/game/useGameStore'
 
 function Game({ questions }: { questions: Question[] }) {
 	const { currentQuestionIndex, isGameActive } = useGameStore()

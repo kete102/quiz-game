@@ -1,8 +1,13 @@
 import { ArrowRight } from 'lucide-react'
 import PlayerStats from './game/PlayerStats'
 import { Link } from '@tanstack/react-router'
+import { useUserStats } from '@/hooks/game/useUserStats'
 
 function Overview() {
+	const { userStats } = useUserStats()
+
+	console.log(userStats)
+
 	return (
 		<div className='h-full w-full space-y-2 select-none'>
 			<section className='flex w-full flex-col items-center gap-y-2 md:flex-row md:justify-between'>

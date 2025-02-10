@@ -2,7 +2,7 @@ import { Check } from 'lucide-react'
 import {
 	DifficultiesApiValueSchema,
 	Difficulty,
-} from '../../services/game/questions/types'
+} from '../../models/Question/types'
 import { DIFFICULTIES } from '../../utils/constants'
 import clsx from 'clsx'
 

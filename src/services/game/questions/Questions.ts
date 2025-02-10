@@ -3,12 +3,12 @@ import {
 	APIQuestion,
 	CategoriesApiValueSchema,
 	DifficultiesApiValueSchema,
-} from './types'
+	Question,
+} from '@/models/Question/types'
 import {
 	CategoriesApiValue,
 	DifficultiesApiValue,
-} from '@/services/game/questions/types'
-import { Question } from '@/store/game/gameStore'
+} from '@/models/Question/types'
 import { createAdapatedQuestion } from './adapters/createAdaptedQuestion'
 
 const BASE_URL = 'https://the-trivia-api.com/v2/questions'
