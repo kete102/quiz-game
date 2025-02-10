@@ -8,7 +8,8 @@ import {
 	CategoriesApiValue,
 	DifficultiesApiValue,
 } from '@/services/game/questions/types'
-import { Question } from '@/store/game/store'
+import { Question } from '@/store/game/gameStore'
+import { createAdapatedQuestion } from './adapters/createAdaptedQuestion'
 
 const BASE_URL = 'https://the-trivia-api.com/v2/questions'
 interface Props {
@@ -46,14 +47,7 @@ export async function FetchQuestions({
 
 		if (!questions) return null
 
-		return questions.map((question) => ({
-			category: question.category,
-			correctAnswer: question.correctAnswer,
-			incorrectAnswers: question.incorrectAnswers,
-			difficulty: question.difficulty,
-			question: question.question,
-			id: question.id,
-		}))
+		return createAdapatedQuestion(questions)
 	} catch (error) {
 		console.log('Error fetching questions: ', error)
 		return null
