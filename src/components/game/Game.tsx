@@ -1,10 +1,10 @@
-import { Question, useGameStore } from '@/store/game/store'
 import GameInfo from './GameInfo'
 import AnswerButton from './AnswerButton'
 import { LogOut } from 'lucide-react'
 import { FinishedGame } from './FinishedGame'
 import { useGame } from '@/hooks/game/useGame'
 import React from 'react'
+import { Question, useGameStore } from '@/store/game/useGameStore'
 
 function Game({ questions }: { questions: Question[] }) {
 	const { currentQuestionIndex, isGameActive } = useGameStore()
@@ -16,7 +16,6 @@ function Game({ questions }: { questions: Question[] }) {
 		showResult,
 		handleAnswerSubmit,
 		handleNextQuestion,
-		handlePlayAgain,
 		handleQuitGame,
 	} = useGame()
 
@@ -67,7 +66,7 @@ function Game({ questions }: { questions: Question[] }) {
 						</div>
 					</React.Fragment>
 				) : (
-					<FinishedGame handlePlayAgain={handlePlayAgain} />
+					<FinishedGame />
 				)}
 			</div>
 		</div>

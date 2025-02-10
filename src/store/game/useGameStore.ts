@@ -1,16 +1,5 @@
 import { create } from 'zustand'
-import { Category, Difficulty } from '../../services/game/questions/types'
-
-export interface Question {
-	id: string
-	category: Category
-	correctAnswer: string
-	incorrectAnswers: string[]
-	question: {
-		text: string
-	}
-	difficulty: Difficulty
-}
+import { Question } from '@/models/Question/types'
 
 interface State {
 	questions: Question[]

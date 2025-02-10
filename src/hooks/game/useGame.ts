@@ -1,8 +1,10 @@
-import { useGameStore } from '@/store/game/store'
-import { useNavigate } from '@tanstack/react-router'
+import { useGameStore } from '@/store/game/useGameStore'
+import { useSession } from '@clerk/clerk-react'
 import { useEffect, useState } from 'react'
+import { useUserStats } from './useUserStats'
 
 export function useGame() {
+	const { session } = useSession()
 	const [shuffledAnswers, setShuffledAnswers] = useState<string[]>([])
 	const [answerSelected, setAnswerSelected] = useState<string>('')
 	const [disableBtn, setDisabledBtn] = useState(false)
@@ -15,10 +17,11 @@ export function useGame() {
 		currentQuestionIndex,
 		addPoints,
 	} = useGameStore()
+	const { updateUserStats } = useUserStats()
+	const { userStats } = useUserStats()
 	const currentQuestion = questions[currentQuestionIndex]
-	const navigate = useNavigate()
 
-	// Shuffle answers solo cuando cambia la pregunta
+	// Shuffle answers only when the quesiton changes
 	useEffect(() => {
 		if (currentQuestion) {
 			const answers = [
@@ -29,43 +32,66 @@ export function useGame() {
 		}
 	}, [currentQuestion])
 
+	// Checks the selected unswers
 	const handleAnswerSubmit = (userAnswer: string) => {
 		if (!currentQuestion || currentQuestionIndex >= questions.length) {
 			endGame()
 			return
 		}
 
-		// Determinar si la respuesta es correcta
+		// Checks if is the right answer
 		const isCorrect = userAnswer === currentQuestion.correctAnswer
 		if (isCorrect) addPoints()
 
-		// Actualizar estado y store
+		// Update the store
 		selectAnswer({ questionId: currentQuestion.id, isCorrect })
 		setAnswerSelected(userAnswer)
-		setDisabledBtn(true) // Deshabilitar botones
-		setShowResult(true) // Mostrar feedback visual
+		setDisabledBtn(true)
+		setShowResult(true)
 	}
 
+	// Handles the finished game flow
+	const handleGameFinished = async () => {
+		// If the user isn't signed in it just returns
+		if (!session?.user) {
+			endGame()
+			return
+		}
+
+		//If the user is signed in, updates de user stats
+		try {
+			updateUserStats({
+				bestStreak: (userStats?.bestStreak ?? 0) + 1,
+				correctAnswers: (userStats?.correctAnswers ?? 0) + 1,
+				streak: (userStats?.streak ?? 0) + 1,
+				totalGames: (userStats?.totalGames ?? 0) + 1,
+				wrongAnswers: (userStats?.wrongAnswers ?? 0) + 1,
+				userId: session.user.id,
+			})
+			endGame()
+		} catch (error) {
+			console.error('Error updating  user stats: ', error)
+		}
+	}
+
+	// Handles the logic to pass to the next question
 	const handleNextQuestion = () => {
-		// Resetear estado para la siguiente pregunta
+		// Resets the state for the next question
 		setAnswerSelected('')
 		setDisabledBtn(false)
 		setShowResult(false)
 
-		// Avanzar a siguiente pregunta o terminar juego
+		// Checks if it's the last question
 		if (currentQuestionIndex + 1 < questions.length) {
 			nextQuestion()
 		} else {
-			endGame()
+			handleGameFinished()
 		}
 	}
 
+	// User quit the game
 	const handleQuitGame = () => {
 		endGame()
-	}
-
-	const handlePlayAgain = () => {
-		navigate({ to: '/game-setup' })
 	}
 
 	return {
@@ -77,6 +103,5 @@ export function useGame() {
 		handleAnswerSubmit,
 		handleNextQuestion,
 		handleQuitGame,
-		handlePlayAgain,
 	}
 }

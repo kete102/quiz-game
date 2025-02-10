@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react'
 import { CATEGORIES } from '../../utils/constants'
 import clsx from 'clsx'
-import { CategoriesApiValueSchema } from '@/services/game/questions/types'
+import { CategoriesApiValueSchema } from '@/models/Question/types'
 
 interface Props {
 	categories: CategoriesApiValueSchema[]

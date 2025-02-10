@@ -1,21 +1,22 @@
 import { ArrowRight } from 'lucide-react'
 import PlayerStats from './game/PlayerStats'
-import { useNavigate } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
+import { useUserStats } from '@/hooks/game/useUserStats'
 
 function Overview() {
-	const navigate = useNavigate()
+	const { userStats } = useUserStats()
 
-	const handleStartGame = () => navigate({ to: '/game-setup' })
+	console.log(userStats)
 
 	return (
 		<div className='h-full w-full space-y-2 select-none'>
 			<section className='flex w-full flex-col items-center gap-y-2 md:flex-row md:justify-between'>
-				<button
+				<Link
+					to='/game-setup'
 					className='inline-flex w-full transform cursor-pointer items-center justify-center gap-x-2 rounded-lg border-none bg-black/10 px-4 py-3 text-2xl font-medium tracking-normal text-white shadow-md transition-all duration-200 hover:scale-103 hover:shadow-2xl active:scale-97 active:shadow-2xl md:w-fit'
-					onClick={handleStartGame}
 				>
 					Start a new game! <ArrowRight />
-				</button>
+				</Link>
 			</section>
 			<section className='grid grid-cols-1 gap-4 p-2 md:grid-cols-2 md:grid-rows-2'>
 				<PlayerStats>

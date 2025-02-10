@@ -38,42 +38,41 @@ export type Database = {
         Row: {
           friend_id: string
           id: string
-          status: string
+          status: Database["public"]["Enums"]["friend_status"] | null
           user_id: string
         }
         Insert: {
-          friend_id?: string
+          friend_id: string
           id?: string
-          status?: string
+          status?: Database["public"]["Enums"]["friend_status"] | null
           user_id?: string
         }
         Update: {
           friend_id?: string
           id?: string
-          status?: string
+          status?: Database["public"]["Enums"]["friend_status"] | null
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "friends_friend_id_fkey"
+            foreignKeyName: "user_friends_friend_id_fkey"
             columns: ["friend_id"]
             isOneToOne: false
             referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedColumns: ["clerk_id"]
           },
           {
-            foreignKeyName: "friends_user_id_fkey"
+            foreignKeyName: "user_friends_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedColumns: ["clerk_id"]
           },
         ]
       }
       user_stats: {
         Row: {
           best_streak: number
-          categories_played: string[]
           correct_answers: number
           id: string
           last_played_at: string
@@ -85,7 +84,6 @@ export type Database = {
         }
         Insert: {
           best_streak: number
-          categories_played?: string[]
           correct_answers?: number
           id?: string
           last_played_at?: string
@@ -97,7 +95,6 @@ export type Database = {
         }
         Update: {
           best_streak?: number
-          categories_played?: string[]
           correct_answers?: number
           id?: string
           last_played_at?: string
@@ -109,29 +106,32 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "game-stats_user_id_fkey"
+            foreignKeyName: "user_stats_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: true
             referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedColumns: ["clerk_id"]
           },
         ]
       }
       users: {
         Row: {
+          clerk_id: string
           created_at: string
-          email: string
-          id: string
+          user_email: string
+          user_name: string
         }
         Insert: {
+          clerk_id?: string
           created_at?: string
-          email?: string
-          id?: string
+          user_email?: string
+          user_name?: string
         }
         Update: {
+          clerk_id?: string
           created_at?: string
-          email?: string
-          id?: string
+          user_email?: string
+          user_name?: string
         }
         Relationships: []
       }
@@ -140,10 +140,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      merge_clerk_users: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
-      [_ in never]: never
+      friend_status: "pending" | "accepted" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never

@@ -70,3 +70,14 @@ export interface APIQuestion {
 	regions: string[]
 	isNiche: boolean
 }
+
+export interface Question {
+	id: string
+	category: Category
+	correctAnswer: string
+	incorrectAnswers: string[]
+	question: {
+		text: string
+	}
+	difficulty: Difficulty
+}
